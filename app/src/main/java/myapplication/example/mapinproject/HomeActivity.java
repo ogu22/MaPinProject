@@ -43,5 +43,8 @@ public class HomeActivity extends FragmentActivity implements OnMapReadyCallback
         LatLng sydney = new LatLng(-34, 151);
         mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+    }//ボタンが押された時の処理
+    public void onClick(){
+        //ここに遷移するための処理を追加する
     }
 }

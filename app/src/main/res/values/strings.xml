@@ -1,4 +1,36 @@
 <resources>
     <string name="app_name">MaPinProject</string>
     <string name="title_activity_maps">Map</string>
+
+    <string-array name="list1">
+        <item>関連順</item>
+        <item>新着順</item>
+        <item>評価順</item>
+    </string-array>
+
+    <string-array name="list2">
+        <item>指定なし</item>
+        <item>１時間以内</item>
+        <item>今日</item>
+        <item>今週</item>
+        <item>今月</item>
+        <item>今年</item>
+    </string-array>
+
+    <string-array name="list3">
+        <item>指定なし</item>
+        <item>星５</item>
+        <item>星４以上</item>
+        <item>星３以上</item>
+        <item>星２以上</item>
+        <item>星１</item>
+    </string-array>
+
+    <string-array name="list4">
+        <item>指定なし</item>
+        <item>買い物</item>
+        <item>スポーツ</item>
+        <item>テレビ</item>
+    </string-array>
+
 </resources>

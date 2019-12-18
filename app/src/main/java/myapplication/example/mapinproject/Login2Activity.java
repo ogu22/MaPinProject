@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 public class Login2Activity extends AppCompatActivity {
     EditText password;
@@ -23,28 +22,25 @@ public class Login2Activity extends AppCompatActivity {
         sendButton.setOnClickListener(new View.OnClickListener() {
                 @Override
             public void onClick(View v) {
-                    String mele = meleaddless.getText().toString();
+                String mele = meleaddless.getText().toString();
 
-                    String pass = password.getText().toString();
-                if (mele.equals("")) {
-                    Intent intent = new Intent(getApplication(), LoginErorrorActivity.class);
-                    startActivity(intent);
-                }else if(pass.equals("")) {
-                    Intent intent = new Intent(getApplication(), LoginErorrorActivity.class);
-                    startActivity(intent);
-                }else{
+                String pass = password.getText().toString();
+                ErrorEXP errorEXP = new ErrorEXP();
+                if(errorEXP.Errorcheck(mele) && errorEXP.Errorcheck(pass) ) {
                     Intent intent = new Intent(getApplication(), HomeActivity.class);
                     startActivity(intent);
-
+                }else{
+                    Intent intent = new Intent(getApplication(), LoginErorrorActivity.class);
+                    startActivity(intent);
+                }
             }
-        }
     });
 
         Button sendButton2 = findViewById(R.id.tourokubutton5);
         sendButton2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplication(), Newtouroku.class);
+                Intent intent = new Intent(getApplication(), NewtourokuActivity.class);
                 startActivity(intent);
             }
         });

@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:ignore="MissingDefaultResource"
+    tools:context=".Histry_searchActivity">
+
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="189dp"
+                android:layout_height="53dp"
+                android:layout_marginStart="104dp"
+                android:layout_marginTop="24dp"
+                android:text="検索履歴"
+                android:textSize="36sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/hisbuckbutton"
+                android:layout_width="67dp"
+                android:layout_height="77dp"
+                android:text="↵"
+                android:textSize="45sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/hisbutton1"
+                android:layout_width="290dp"
+                android:layout_height="65dp"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="28dp"
+                android:text="投稿１"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+            <Button
+                android:id="@+id/hisbutton2"
+                android:layout_width="290dp"
+                android:layout_height="65dp"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="8dp"
+                android:text="投稿２"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/hisbutton1" />
+
+            <Button
+                android:id="@+id/hisbutton3"
+                android:layout_width="290dp"
+                android:layout_height="65dp"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="8dp"
+                android:text="投稿３"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/hisbutton2" />
+
+            <Button
+                android:id="@+id/hisbutton4"
+                android:layout_width="290dp"
+                android:layout_height="65dp"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="8dp"
+                android:text="投稿４"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/hisbutton3" />
+
+            <Button
+                android:id="@+id/hisbutton5"
+                android:layout_width="290dp"
+                android:layout_height="65dp"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="8dp"
+                android:text="投稿５"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/hisbutton4" />
+
+            <Button
+                android:id="@+id/hisbutton6"
+                android:layout_width="290dp"
+                android:layout_height="65dp"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="8dp"
+                android:text="投稿６"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/hisbutton5" />
+
+            <Button
+                android:id="@+id/hisbutton7"
+                android:layout_width="290dp"
+                android:layout_height="65dp"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="8dp"
+                android:text="投稿７"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/hisbutton6" />
+
+            <Button
+                android:id="@+id/hisbutton8"
+                android:layout_width="290dp"
+                android:layout_height="65dp"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="8dp"
+                android:text="投稿８"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/hisbutton7" />
+
+            <Button
+                android:id="@+id/hisbutton9"
+                android:layout_width="290dp"
+                android:layout_height="65dp"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="8dp"
+                android:text="投稿９"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/hisbutton8" />
+
+            <Button
+                android:id="@+id/hisbutton10"
+                android:layout_width="290dp"
+                android:layout_height="65dp"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="8dp"
+                android:text="投稿１０"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/hisbutton9" />
+
+            <Button
+                android:id="@+id/hisbutton11"
+                android:layout_width="290dp"
+                android:layout_height="65dp"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="8dp"
+                android:text="投稿１１"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/hisbutton10" />
+
+            <Button
+                android:id="@+id/hishomebutton"
+                android:layout_width="88dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="26dp"
+                android:layout_marginEnd="5dp"
+                android:text="HOME"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

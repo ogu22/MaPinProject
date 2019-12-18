@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    ​
+
+    <Button
+        android:id="@+id/seabuckbutton2"
+        android:layout_width="67dp"
+        android:layout_height="77dp"
+        android:text="↵"
+        android:textSize="45sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    ​
+
+    <SearchView
+        android:id="@+id/seasearchView2"
+        android:layout_width="306dp"
+        android:layout_height="82dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/seabuckbutton2"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </SearchView>
+    ​
+
+    <TextView
+        android:id="@+id/seatextView1"
+        android:layout_width="122dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="24dp"
+        android:text="並べ替え"
+        android:textSize="30sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/seasearchView2" />
+    ​
+
+    <TextView
+        android:id="@+id/seatextView2"
+        android:layout_width="122dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:text="経過時間"
+        android:textSize="30sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/seatextView1" />
+    ​
+
+    ​
+
+    ​
+
+    <TextView
+        android:id="@+id/seatextView3"
+        android:layout_width="122dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:text="評　価"
+        android:textSize="36sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/seatextView2" />
+
+    <TextView
+        android:id="@+id/seatextView4"
+        android:layout_width="122dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="27dp"
+        android:text=" タ　グ"
+        android:textSize="36sp"
+        app:layout_constraintEnd_toStartOf="@+id/seaspinner4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/seatextView3" />
+
+    <Spinner
+        android:id="@+id/seaspinner1"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="24dp"
+        android:entries="@array/list1"
+        app:layout_constraintStart_toEndOf="@+id/seatextView1"
+        app:layout_constraintTop_toBottomOf="@+id/seasearchView2" />
+    ​
+
+    <Spinner
+        android:id="@+id/seaspinner2"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="16dp"
+        android:entries="@array/list2"
+        app:layout_constraintStart_toEndOf="@+id/seatextView2"
+        app:layout_constraintTop_toBottomOf="@+id/seaspinner1" />
+    ​
+
+    <Spinner
+        android:id="@+id/seaspinner3"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="16dp"
+        android:entries="@array/list3"
+        app:layout_constraintStart_toEndOf="@+id/seatextView3"
+        app:layout_constraintTop_toBottomOf="@+id/seaspinner2" />
+    ​
+
+    ​
+
+    ​
+
+    ​
+
+    ​
+
+    ​
+
+    ​
+
+    <Spinner
+        android:id="@+id/seaspinner4"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="27dp"
+        android:layout_marginTop="16dp"
+        android:entries="@array/list4"
+        app:layout_constraintStart_toEndOf="@+id/seatextView4"
+        app:layout_constraintTop_toBottomOf="@+id/seaspinner3" />
+
+    <Button
+        android:id="@+id/seahisbutton1"
+        android:layout_width="150dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="236dp"
+        android:text="キャンセル"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/seabutton2"
+        android:layout_width="157dp"
+        android:layout_height="66dp"
+        android:layout_marginBottom="236dp"
+        android:text="適用"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/seabutton3"
+        android:layout_width="267dp"
+        android:layout_height="69dp"
+        android:layout_marginStart="64dp"
+        android:text="履歴をもっと見る"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="428dp"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <Button
+        android:id="@+id/seabutton5"
+        android:layout_width="320dp"
+        android:layout_height="70dp"
+        android:layout_marginEnd="44dp"
+        android:text="投稿２"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@+id/seabutton3"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/seabutton4"
+        android:layout_width="320dp"
+        android:layout_height="70dp"
+        android:layout_marginEnd="44dp"
+        android:text="投稿１"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@+id/seabutton5"
+        app:layout_constraintEnd_toEndOf="parent" />
+    ​
+</androidx.constraintlayout.widget.ConstraintLayout>

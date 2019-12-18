@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LoginErorrorActivity">
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="329dp"
+        android:layout_height="26dp"
+        android:layout_marginStart="58dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="20dp"
+        android:text="メールアドレス、又はパスワードが違います"
+        android:textColor="@android:color/holo_red_dark"
+        app:layout_constraintBottom_toTopOf="@+id/ntextView5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/ntextView2"
+        android:layout_width="264dp"
+        android:layout_height="77dp"
+        android:layout_marginStart="72dp"
+        android:layout_marginTop="56dp"
+        android:layout_marginEnd="73dp"
+        android:text="M a P i n"
+        android:textSize="64sp"
+        android:textStyle="normal|bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/ntextView3"
+        android:layout_width="326dp"
+        android:layout_height="31dp"
+        android:layout_marginStart="57dp"
+        android:layout_marginEnd="57dp"
+        android:text="～位置情報共有アプリ～"
+        android:textSize="28sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.517"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ntextView2" />
+
+    <EditText
+        android:id="@+id/neditText3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="42dp"
+        android:layout_marginEnd="156dp"
+        android:layout_marginBottom="232dp"
+        android:ems="10"
+
+        android:text=""
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/ntextView7"
+        android:layout_width="281dp"
+        android:layout_height="24dp"
+        android:layout_marginEnd="76dp"
+        android:layout_marginBottom="204dp"
+        android:text="パスワード"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <EditText
+        android:id="@+id/neditText4"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:layout_marginEnd="144dp"
+        android:layout_marginBottom="172dp"
+        android:ems="10"
+        android:text=""
+        android:inputType="textPassword"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/ntextView5"
+        android:layout_width="281dp"
+        android:layout_height="24dp"
+        android:layout_marginEnd="72dp"
+        android:layout_marginBottom="256dp"
+        android:text="メールアドレス"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/twitterbutton2"
+        android:layout_width="130dp"
+        android:layout_height="114dp"
+        android:layout_marginStart="33dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="26dp"
+        android:layout_marginBottom="57dp"
+        android:text="twitterと連携"
+        app:layout_constraintBottom_toTopOf="@+id/ntextView5"
+        app:layout_constraintEnd_toStartOf="@+id/facebutton3"
+        app:layout_constraintHorizontal_bias="0.465"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ntextView3"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/facebutton3"
+        android:layout_width="141dp"
+        android:layout_height="117dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="40dp"
+        android:text="Facebookと連携"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ntextView3" />
+
+    <Button
+        android:id="@+id/loginbutton4"
+        android:layout_width="157dp"
+        android:layout_height="49dp"
+        android:layout_marginStart="124dp"
+        android:layout_marginTop="12dp"
+        android:text="ログイン"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/neditText4" />
+
+    <Button
+        android:id="@+id/tourokubutton5"
+        android:layout_width="192dp"
+        android:layout_height="47dp"
+        android:layout_marginStart="109dp"
+        android:layout_marginBottom="38dp"
+        android:text="会員登録はこちら"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

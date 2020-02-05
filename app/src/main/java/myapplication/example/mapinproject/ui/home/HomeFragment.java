@@ -8,7 +8,10 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMap.OnMapClickListener;
@@ -18,6 +21,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import myapplication.example.mapinproject.R;
+import myapplication.example.mapinproject.ui.postadd.PostAddFragment;
 
 public class HomeFragment extends Fragment implements OnMapClickListener,OnMapReadyCallback {
 
@@ -46,15 +50,23 @@ public class HomeFragment extends Fragment implements OnMapClickListener,OnMapRe
         mMap = googleMap;
 
         // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        LatLng sapporo = new LatLng(43.068625, 141.350801);
+        mMap.addMarker(new MarkerOptions().position(sapporo).title("Marker in Sapporo!"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(sapporo));
+        mMap.moveCamera(CameraUpdateFactory.zoomTo(16));
         mMap.setOnMapClickListener(this);
     }
 
     @Override
     public void onMapClick(LatLng point) {
-        //TODO: マップタップハンドラーの実装
-        Toast.makeText(getActivity(), "tapped, point=" + point, Toast.LENGTH_SHORT).show();
+        PostAddFragment postAdd = new PostAddFragment();
+        Bundle bundle = new Bundle();
+        bundle.putDouble("latitude", point.latitude);
+        bundle.putDouble("longitude", point.longitude);
+        postAdd.setArguments(bundle);
+        FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.nav_host_fragment, postAdd);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
     }
 }

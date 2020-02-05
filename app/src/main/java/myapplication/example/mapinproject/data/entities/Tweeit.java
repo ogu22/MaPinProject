@@ -11,7 +11,7 @@ public class Tweeit {
     private String tweeitId;
     private String userId;
     private ArrayList<Tag> tags;
-    private ArrayList<Location> locations;
+    private Location locations;
     private ArrayList<Reply> replies;
     private String tweeitTitle;
     private String tweeit;
@@ -19,7 +19,7 @@ public class Tweeit {
     private String timestamp;
     private int evaluation;
 
-    public Tweeit(String tweeitId, String userId, ArrayList<Tag> tags, ArrayList<Location> locations, ArrayList<Reply> replies, String tweeitTitle, String tweeit, String imagePath, String timestamp, int evaluation) {
+    public Tweeit(String tweeitId, String userId, ArrayList<Tag> tags, Location locations, ArrayList<Reply> replies, String tweeitTitle, String tweeit, String imagePath, String timestamp, int evaluation) {
         this.tweeitId = tweeitId;
         this.userId = userId;
         this.tags = tags;
@@ -48,7 +48,7 @@ public class Tweeit {
         return tags;
     }
 
-    public ArrayList<Location> getLocations() {
+    public Location getLocations() {
         return locations;
     }
 

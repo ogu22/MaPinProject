@@ -45,6 +45,7 @@
 <!--        <activity android:name=".business.activities.HomeActivity"/>-->
         <activity android:name=".business.activities.Pin_infoActivity"/>
         <activity android:name=".business.activities.LoginActivity"/>
+        <activity android:name=".business.locset.LocsetActivity"/>
     </application>
     
     <uses-permission android:name="android.permission.INTERNET" />

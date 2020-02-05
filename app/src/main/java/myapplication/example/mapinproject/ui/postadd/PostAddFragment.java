@@ -71,8 +71,10 @@ public class PostAddFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Bundle bundle = getArguments();
-        latitude = String.valueOf(bundle.getDouble("latitude"));
-        longitude =String.valueOf(bundle.getDouble("longitude"));
+        if (bundle != null) {
+            latitude = String.valueOf(bundle.getDouble("latitude"));
+            longitude =String.valueOf(bundle.getDouble("longitude"));
+        }
     }
 
     @Nullable
@@ -123,9 +125,17 @@ public class PostAddFragment extends Fragment {
                 FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
                 String uuid = UUID.randomUUID().toString();
                 String userId = currentUser.getUid();
+
                 Tag tag = new Tag(UUID.randomUUID().toString(), categoryText.getText().toString());
                 ArrayList<Tag> tags = new ArrayList<>();
                 tags.add(tag);
+                for (Tag t : tags) {
+                    DatabaseManager.addTag(t);
+                }
+
+                if (latitude == null) {
+                    return;
+                }
                 Location location = new Location(latitude, longitude);
                 ArrayList<Reply> replies = new ArrayList<>();
                 String title = locationText.getText().toString();

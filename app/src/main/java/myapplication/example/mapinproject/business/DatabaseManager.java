@@ -5,7 +5,6 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
-import com.google.android.gms.tasks.OnCanceledListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
@@ -35,7 +34,7 @@ public class DatabaseManager {
 
     public static void addTag(Tag tag) {
         database = FirebaseDatabase.getInstance();
-        DatabaseReference ref = database.getReference("tag").child(tag.getTagId());
+        DatabaseReference ref = database.getReference("tag").child(tag.getTag());
         ref.setValue(tag);
     }
 

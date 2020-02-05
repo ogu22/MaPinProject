@@ -11,10 +11,13 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
 import com.google.android.gms.maps.GoogleMap.OnMapClickListener;
+import com.google.android.gms.maps.GoogleMap.OnMapLongClickListener;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.HashMap;
@@ -25,8 +28,9 @@ import myapplication.example.mapinproject.business.DatabaseManager;
 import myapplication.example.mapinproject.data.entities.SearchConditions;
 import myapplication.example.mapinproject.data.entities.Tweeit;
 import myapplication.example.mapinproject.ui.postadd.PostAddFragment;
+import myapplication.example.mapinproject.ui.postdetail.PostDetailFragment;
 
-public class HomeFragment extends Fragment implements OnMapClickListener,OnMapReadyCallback {
+public class HomeFragment extends Fragment implements OnMapLongClickListener,OnMapClickListener,OnMapReadyCallback,OnMarkerClickListener {
 
     private GoogleMap mMap;
 
@@ -40,7 +44,6 @@ public class HomeFragment extends Fragment implements OnMapClickListener,OnMapRe
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.home, null, false);
-
         SupportMapFragment mapFragment = (SupportMapFragment) this.getChildFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
@@ -58,10 +61,11 @@ public class HomeFragment extends Fragment implements OnMapClickListener,OnMapRe
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sapporo));
         mMap.moveCamera(CameraUpdateFactory.zoomTo(16));
         mMap.setOnMapClickListener(this);
+        mMap.setOnMarkerClickListener(this);
     }
 
     @Override
-    public void onMapClick(LatLng point) {
+    public void onMapLongClick(LatLng point) {
         PostAddFragment postAdd = new PostAddFragment();
         Bundle bundle = new Bundle();
         bundle.putDouble("latitude", point.latitude);
@@ -71,6 +75,24 @@ public class HomeFragment extends Fragment implements OnMapClickListener,OnMapRe
         fragmentTransaction.replace(R.id.nav_host_fragment, postAdd);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
+    }
+
+    @Override
+    public boolean onMarkerClick(Marker marker) {
+        PostDetailFragment postDetail = new PostDetailFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString("tweeitId", (String) marker.getTag());
+        postDetail.setArguments(bundle);
+        FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.nav_host_fragment, postDetail);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+        return false;
+    }
+
+    @Override
+    public void onMapClick(LatLng point) {
+
     }
 
     @Override
@@ -89,7 +111,7 @@ public class HomeFragment extends Fragment implements OnMapClickListener,OnMapRe
                     options.draggable(false);
                     //options.anchor(tweeit.getUserId());
                     //options.getIcon(tweeit.getImagePath());
-                    mMap.addMarker(options);
+                    mMap.addMarker(options).setTag(tweeit.getTweeitId());
                 }
             }
         });

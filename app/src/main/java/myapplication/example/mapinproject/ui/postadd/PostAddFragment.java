@@ -13,11 +13,13 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.google.android.gms.tasks.OnCanceledListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -100,39 +102,45 @@ public class PostAddFragment extends Fragment {
                 DatabaseManager.addImage(filePath, new OnSuccessListener() {
                     @Override
                     public void onSuccess(Object o) {
-
-                        //TODO: ここらへんリファクタリングしたい...
-                        UploadTask.TaskSnapshot taskSnapshot = (UploadTask.TaskSnapshot) o;
-                        String uploadedUrl = taskSnapshot.getUploadSessionUri().toString();
-                        FirebaseUser currentUser  = FirebaseAuth.getInstance().getCurrentUser();
-                        String uuid = UUID.randomUUID().toString();
-                        String userId = currentUser.getUid();
-                        Tag tag = new Tag(UUID.randomUUID().toString(),categoryText.getText().toString());
-                        ArrayList<Tag> tags = new ArrayList<>();
-                        tags.add(tag);
-                        Location location = new Location(latitude,longitude);
-                        ArrayList<Reply> replies = new ArrayList<>();
-                        String title = locationText.getText().toString();
-                        String content = contentText.getText().toString();
-                        Date date = new Date();
-                        String dateFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss").format(date);
-                        int num = ratingBar.getNumStars();
-
-                        Tweeit tweeit = new Tweeit(uuid,userId,tags,location,replies,title,content,uploadedUrl,dateFormat,num);
-                        DatabaseManager.addTweeit(tweeit);
-
-                        FragmentManager fragmentManager = getParentFragmentManager();
-                        if(fragmentManager != null) {
-                            fragmentManager.popBackStack();
-                        }
+                        test((UploadTask.TaskSnapshot) o);
                     }
-                }, new OnCanceledListener() {
+                }, new OnFailureListener() {
                     @Override
-                    public void onCanceled() {
-
+                    public void onFailure(@NonNull Exception e) {
+                        test(null);
                     }
                 });
 
+            }
+
+            private void test(UploadTask.TaskSnapshot o) {
+                //TODO: ここらへんリファクタリングしたい...
+                String uploadedUrl = "";
+                if (o != null) {
+                    UploadTask.TaskSnapshot taskSnapshot = o;
+                    uploadedUrl = taskSnapshot.getUploadSessionUri().toString();
+                }
+                FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+                String uuid = UUID.randomUUID().toString();
+                String userId = currentUser.getUid();
+                Tag tag = new Tag(UUID.randomUUID().toString(), categoryText.getText().toString());
+                ArrayList<Tag> tags = new ArrayList<>();
+                tags.add(tag);
+                Location location = new Location(latitude, longitude);
+                ArrayList<Reply> replies = new ArrayList<>();
+                String title = locationText.getText().toString();
+                String content = contentText.getText().toString();
+                Date date = new Date();
+                String dateFormat = new SimpleDateFormat("yyyy年MM月dd日 hh時mm分ss秒").format(date);
+                int num = ratingBar.getNumStars();
+
+                Tweeit tweeit = new Tweeit(uuid, userId, tags, location, replies, title, content, uploadedUrl, dateFormat, num);
+                DatabaseManager.addTweeit(tweeit);
+
+                FragmentManager fragmentManager = getParentFragmentManager();
+                if (fragmentManager != null) {
+                    fragmentManager.popBackStack();
+                }
             }
         });
 

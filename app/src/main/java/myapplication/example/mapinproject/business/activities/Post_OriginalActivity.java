@@ -82,10 +82,6 @@ public class Post_OriginalActivity extends AppCompatActivity implements View.OnC
             }
         });
     }
-    private void profiledone(){
-        // ダイアログクラスをインスタンス化
-        PostDoneDialog dialog = new PostDoneDialog();
-        // 表示  getFagmentManager()は固定
-        dialog.show(getFragmentManager(), "postdone");
+    public void profiledone(){
     }
 }

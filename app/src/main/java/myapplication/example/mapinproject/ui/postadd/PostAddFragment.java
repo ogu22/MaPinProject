@@ -1,5 +1,6 @@
 package myapplication.example.mapinproject.ui.postadd;
 
+import android.app.DialogFragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,12 +12,16 @@ import android.widget.RatingBar;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import myapplication.example.mapinproject.R;
 import myapplication.example.mapinproject.business.activities.HomeActivity;
+import myapplication.example.mapinproject.business.activities.Post_OriginalActivity;
+import myapplication.example.mapinproject.business.fragments.PostDoneDialog;
+import myapplication.example.mapinproject.business.fragments.Post_DeleteDialog;
 import myapplication.example.mapinproject.data.storage.PostStorage;
 
 public class PostAddFragment extends Fragment  implements View.OnClickListener{
@@ -66,7 +71,10 @@ public class PostAddFragment extends Fragment  implements View.OnClickListener{
         }
         if (i == R.id.post_send_button) {
             // PostDoneDialog表示
-            PostDoneDialog();
+            // ダイアログクラスをインスタンス化
+            PostDoneDialog dialog = new PostDoneDialog();
+            // 表示  getFagmentManager()は固定、sampleは識別タグ
+            dialog.show(getChildFragmentManager(), "delete");
         }
     }
 
@@ -82,8 +90,7 @@ public class PostAddFragment extends Fragment  implements View.OnClickListener{
             }
         });
     }
-    public void PostDoneDialog(){
-        Intent intent = new Intent(getActivity(), HomeActivity.class);
-        startActivity(intent);
+    private void postdonedialog(){
     }
+
 }

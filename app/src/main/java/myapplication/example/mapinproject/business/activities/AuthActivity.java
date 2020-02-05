@@ -7,7 +7,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.facebook.CallbackManager;
+//import com.facebook.CallbackManager;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -20,7 +20,7 @@ import com.google.firebase.auth.OAuthProvider;
 import myapplication.example.mapinproject.R;
 
 public class AuthActivity extends AppCompatActivity {
-    private CallbackManager mCallbackManager;
+//    private CallbackManager mCallbackManager;
     private FirebaseAuth mAuth;
 
     OAuthProvider.Builder provider = OAuthProvider.newBuilder("twitter.com");

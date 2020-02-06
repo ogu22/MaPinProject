@@ -64,6 +64,9 @@
     <string name="menu_notice">お知らせ</string>
     <string name="menu_profile">プロフィール</string>
     <string name="menu_postadd">新規投稿</string>
+    <string name="menu_post">投稿</string>
+    <string name="search">検索</string>
+
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

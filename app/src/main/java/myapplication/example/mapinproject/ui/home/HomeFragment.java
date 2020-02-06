@@ -62,6 +62,7 @@ public class HomeFragment extends Fragment implements OnMapLongClickListener,OnM
         mMap.moveCamera(CameraUpdateFactory.zoomTo(16));
         mMap.setOnMapClickListener(this);
         mMap.setOnMarkerClickListener(this);
+        mMap.setOnMapLongClickListener(this);
     }
 
     @Override

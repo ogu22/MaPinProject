@@ -1,4 +1,4 @@
-package myapplication.example.mapinproject.ui.postadd;
+package myapplication.example.mapinproject.ui.post;
 
 import android.app.DialogFragment;
 import android.content.Intent;
@@ -24,7 +24,7 @@ import myapplication.example.mapinproject.business.fragments.PostDoneDialog;
 import myapplication.example.mapinproject.business.fragments.Post_DeleteDialog;
 import myapplication.example.mapinproject.data.storage.PostStorage;
 
-public class PostAddFragment extends Fragment  implements View.OnClickListener{
+public class PostFragment extends Fragment  implements View.OnClickListener{
 
     private static final int RESULT_PICK_IMAGEFILE = 1000;
     private ImageView imageView;
@@ -38,15 +38,15 @@ public class PostAddFragment extends Fragment  implements View.OnClickListener{
     private DatabaseReference ref;
     private DatabaseReference testRef;
 
-    public static PostAddFragment newInstance() {
-        PostAddFragment fragment = new PostAddFragment();
+    public static PostFragment newInstance() {
+        PostFragment fragment = new PostFragment();
         return fragment;
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.post_original, null, false);
+        View view = inflater.inflate(R.layout.post, null, false);
 
         locationText = view.findViewById(R.id.post_location_text);
         contentText = view.findViewById(R.id.post_content_text);

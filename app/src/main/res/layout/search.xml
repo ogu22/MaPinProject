@@ -3,24 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <Button
-        android:id="@+id/buckbutton2"
-        android:layout_width="67dp"
-        android:layout_height="77dp"
-        android:text="↵"
-        android:textSize="45sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    android:layout_height="match_parent"
+    android:background="#FFFFFF">
 
     <SearchView
         android:id="@+id/searchView2"
-        android:layout_width="306dp"
-        android:layout_height="82dp"
-        android:layout_marginStart="8dp"
+        android:layout_width="348dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="33dp"
         android:layout_marginTop="1dp"
-        app:layout_constraintStart_toEndOf="@+id/buckbutton2"
+        android:layout_marginEnd="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -28,7 +22,7 @@
         android:layout_width="122dp"
         android:layout_height="50dp"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="8dp"
         android:text="並べ替え"
         android:textSize="30sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -72,7 +66,7 @@
         android:layout_width="200dp"
         android:layout_height="50dp"
         android:layout_marginStart="28dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="8dp"
         android:entries="@array/list1"
         app:layout_constraintStart_toEndOf="@+id/textView1"
         app:layout_constraintTop_toBottomOf="@+id/searchView2" />
@@ -134,11 +128,13 @@
         android:layout_width="267dp"
         android:layout_height="69dp"
         android:layout_marginStart="65dp"
+        android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
         android:text="履歴をもっと見る"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button5" />
 
     <Button
         android:id="@+id/button4"
@@ -165,7 +161,7 @@
     <View
         android:layout_width="fill_parent"
         android:layout_height="1dp"
-        android:layout_marginTop="456dp"
+        android:layout_marginTop="430dp"
         android:background="@android:color/darker_gray"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints"

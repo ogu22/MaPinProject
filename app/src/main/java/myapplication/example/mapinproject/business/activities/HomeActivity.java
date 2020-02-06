@@ -1,6 +1,7 @@
 package myapplication.example.mapinproject.business.activities;
 
 import android.annotation.SuppressLint;
+import android.app.ActionBar;
 import android.app.MediaRouteButton;
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,8 +32,10 @@ import myapplication.example.mapinproject.R;
 import myapplication.example.mapinproject.business.fragments.PostDoneDialog;
 import myapplication.example.mapinproject.ui.home.HomeFragment;
 import myapplication.example.mapinproject.ui.notice.NoticeFragment;
+import myapplication.example.mapinproject.ui.post.PostFragment;
 import myapplication.example.mapinproject.ui.postadd.PostAddFragment;
 import myapplication.example.mapinproject.ui.profile.ProfileFragment;
+import myapplication.example.mapinproject.ui.search.SearchFragment;
 
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
     private AppBarConfiguration mAppBarConfiguration;
@@ -47,7 +51,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setVisibility(View.VISIBLE);
-
 
             // 押したら現在地がわかるように
             fab.setOnClickListener(new View.OnClickListener() {
@@ -87,13 +90,21 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
         int itemId = item.getItemId();
+        FloatingActionButton fab = findViewById(R.id.fab);
         switch (itemId) {
-            case R.id.action_settings:
-                Intent intent = new Intent(this,LoginActivity.class);
+            // ログアウトタップ
+            case R.id.action_logout:
+                Intent intent = new Intent(this, LoginActivity.class);
                 startActivity(intent);
                 break;
+            case R.id.searchbutton:
+                fab.setVisibility(View.GONE);
+                FragmentTransaction post = getSupportFragmentManager().beginTransaction();
+                post.replace(R.id.nav_host_fragment, new SearchFragment());
+                post.commit();
+                break;
+
         }
         return super.onOptionsItemSelected(item);
     }

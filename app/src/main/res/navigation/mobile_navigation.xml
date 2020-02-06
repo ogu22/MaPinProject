@@ -28,5 +28,11 @@
         android:label="@string/menu_postadd"
         tools:layout="@layout/fragment_gallery" />
 
+    <fragment
+        android:id="@+id/search"
+        android:name="myapplication.example.mapinproject.ui.search.SearchFragment"
+        android:label="@string/search"
+        tools:layout="@layout/fragment_gallery" />
+
 
 </navigation>

@@ -115,7 +115,7 @@ public class DatabaseManager {
 
     public static void getTweeit(String tweeitId, final TweeitCallback databaseCallback) {
         database = FirebaseDatabase.getInstance();
-        DatabaseReference ref = database.getReference("tweeit").orderByChild("tweeitId").equalTo(tweeitId).getRef();
+        DatabaseReference ref = database.getReference("tweeit").orderByChild("tweeitId").startAt(tweeitId).endAt(tweeitId).limitToFirst(1).getRef();
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -165,6 +165,7 @@ public class DatabaseManager {
         storage = FirebaseStorage.getInstance();
         String uuid = UUID.randomUUID().toString();
         StorageReference storageRef = storage.getReference().child("images").child(uuid);
+        //FIXME: ダウンロードURLの取得
         storageRef.putFile(filePath).addOnSuccessListener(successListener).addOnFailureListener(failureListener);
     }
 

@@ -1,42 +1,40 @@
 package myapplication.example.mapinproject.business.activities;
 
 import android.annotation.SuppressLint;
-import android.app.ActionBar;
-import android.app.MediaRouteButton;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
 import myapplication.example.mapinproject.R;
-import myapplication.example.mapinproject.business.fragments.PostDoneDialog;
+import myapplication.example.mapinproject.business.locset.Locset;
 import myapplication.example.mapinproject.ui.home.HomeFragment;
 import myapplication.example.mapinproject.ui.notice.NoticeFragment;
-import myapplication.example.mapinproject.ui.post.PostFragment;
 import myapplication.example.mapinproject.ui.postadd.PostAddFragment;
 import myapplication.example.mapinproject.ui.profile.ProfileFragment;
 import myapplication.example.mapinproject.ui.search.SearchFragment;
-import myapplication.example.mapinproject.business.locset.Locset;
 
-public class HomeActivity extends AppCompatActivity {
-    private AppBarConfiguration mAppBarConfiguration;
-
+public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private static final int REQUEST_CODE = 1;
+    private AppBarConfiguration mAppBarConfiguration;
+    private DrawerLayout drawer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,14 +50,14 @@ public class HomeActivity extends AppCompatActivity {
 
         fab.setVisibility(View.VISIBLE);
 
-            // 押したら現在地がわかるように
-            fab.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                            .setAction("Action", null).show();
-                }
-            });
+        // 押したら現在地がわかるように
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
         drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
@@ -142,6 +140,10 @@ public class HomeActivity extends AppCompatActivity {
                 postadd.replace(R.id.nav_host_fragment, new PostAddFragment());
                 postadd.commit();
                 break;
+        }
+        drawer.closeDrawer(Gravity.LEFT);
+        return false;
+    }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

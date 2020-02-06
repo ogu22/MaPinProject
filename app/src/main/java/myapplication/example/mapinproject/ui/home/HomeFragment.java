@@ -7,17 +7,30 @@ import android.view.ViewGroup;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
+import com.google.android.gms.maps.GoogleMap.OnMapClickListener;
+import com.google.android.gms.maps.GoogleMap.OnMapLongClickListener;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import myapplication.example.mapinproject.R;
+import java.util.HashMap;
 
-public class HomeFragment extends Fragment implements OnMapReadyCallback {
+import myapplication.example.mapinproject.R;
+import myapplication.example.mapinproject.business.TweeitCallback;
+import myapplication.example.mapinproject.business.DatabaseManager;
+import myapplication.example.mapinproject.data.entities.SearchConditions;
+import myapplication.example.mapinproject.data.entities.Tweeit;
+import myapplication.example.mapinproject.ui.postadd.PostAddFragment;
+import myapplication.example.mapinproject.ui.postdetail.PostDetailFragment;
+
+public class HomeFragment extends Fragment implements OnMapLongClickListener,OnMapClickListener,OnMapReadyCallback,OnMarkerClickListener {
 
     private GoogleMap mMap;
 
@@ -31,7 +44,6 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.home, null, false);
-
         SupportMapFragment mapFragment = (SupportMapFragment) this.getChildFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
@@ -44,8 +56,65 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
         mMap = googleMap;
 
         // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        LatLng sapporo = new LatLng(43.068625, 141.350801);
+        mMap.addMarker(new MarkerOptions().position(sapporo).title("Marker in Sapporo!"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(sapporo));
+        mMap.moveCamera(CameraUpdateFactory.zoomTo(16));
+        mMap.setOnMapClickListener(this);
+        mMap.setOnMarkerClickListener(this);
+    }
+
+    @Override
+    public void onMapLongClick(LatLng point) {
+        PostAddFragment postAdd = new PostAddFragment();
+        Bundle bundle = new Bundle();
+        bundle.putDouble("latitude", point.latitude);
+        bundle.putDouble("longitude", point.longitude);
+        postAdd.setArguments(bundle);
+        FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.nav_host_fragment, postAdd);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+    }
+
+    @Override
+    public boolean onMarkerClick(Marker marker) {
+        PostDetailFragment postDetail = new PostDetailFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString("tweeitId", (String) marker.getTag());
+        postDetail.setArguments(bundle);
+        FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.nav_host_fragment, postDetail);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+        return false;
+    }
+
+    @Override
+    public void onMapClick(LatLng point) {
+
+    }
+
+    @Override
+    public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
+        SearchConditions conditions = new SearchConditions();
+        DatabaseManager.getTweeit(conditions, new TweeitCallback() {
+            @Override
+            public void getTweeitCallBack(HashMap<String, Tweeit> map) {
+                for (Tweeit tweeit : map.values()) {
+                    Double latitude = Double.parseDouble(tweeit.getLocations().getLatitude());
+                    Double longitude =  Double.parseDouble(tweeit.getLocations().getLongitude());
+                    LatLng latLng = new LatLng(latitude,longitude);
+                    MarkerOptions options = new MarkerOptions();
+                    options.position(latLng);
+                    options.title(tweeit.getTweeitTitle());
+                    options.draggable(false);
+                    //options.anchor(tweeit.getUserId());
+                    //options.getIcon(tweeit.getImagePath());
+                    mMap.addMarker(options).setTag(tweeit.getTweeitId());
+                }
+            }
+        });
+        super.onViewStateRestored(savedInstanceState);
     }
 }

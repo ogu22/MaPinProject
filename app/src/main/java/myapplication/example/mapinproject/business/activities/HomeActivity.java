@@ -5,25 +5,20 @@ import android.app.ActionBar;
 import android.app.MediaRouteButton;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Gravity;
+import android.util.Log;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
@@ -36,20 +31,25 @@ import myapplication.example.mapinproject.ui.post.PostFragment;
 import myapplication.example.mapinproject.ui.postadd.PostAddFragment;
 import myapplication.example.mapinproject.ui.profile.ProfileFragment;
 import myapplication.example.mapinproject.ui.search.SearchFragment;
+import myapplication.example.mapinproject.business.locset.Locset;
 
-public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+public class HomeActivity extends AppCompatActivity {
     private AppBarConfiguration mAppBarConfiguration;
-    private DrawerLayout drawer;
 
-    @SuppressLint("RestrictedApi")
+    private static final int REQUEST_CODE = 1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //パーミッション、位置情報h許可Activityの呼び出し
+        Locset.request(HomeActivity.this, Locset.SettingPriority.HIGH_ACCURACY, REQUEST_CODE);
+
+        //ナビゲーションドロワー
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         FloatingActionButton fab = findViewById(R.id.fab);
+
         fab.setVisibility(View.VISIBLE);
 
             // 押したら現在地がわかるように
@@ -62,7 +62,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             });
         drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
@@ -71,7 +70,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
-//        NavigationUI.setupWithNavController(navigationView, navController);
+        NavigationUI.setupWithNavController(navigationView, navController);
     }
 
     @Override
@@ -143,8 +142,22 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 postadd.replace(R.id.nav_host_fragment, new PostAddFragment());
                 postadd.commit();
                 break;
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == REQUEST_CODE) {
+            Log.d("LocsetSample", "locset result: " + resultCode);
+            switch (resultCode) {
+                case Locset.ResultCode.SUCCESS:
+                    // setting ok
+                    Toast.makeText(this, "locset success", Toast.LENGTH_SHORT).show();
+                    break;
+                default:
+                    // setting ng
+                    Toast.makeText(this, "locset failure", Toast.LENGTH_SHORT).show();
+                    break;
+            }
         }
-        drawer.closeDrawer(Gravity.LEFT);
-        return false;
     }
 }

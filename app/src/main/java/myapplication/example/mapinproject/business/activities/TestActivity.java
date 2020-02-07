@@ -5,6 +5,9 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
+
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -15,8 +18,6 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
 
-import androidx.annotation.NonNull;
-import androidx.fragment.app.FragmentActivity;
 import myapplication.example.mapinproject.R;
 import myapplication.example.mapinproject.data.entities.Test;
 import myapplication.example.mapinproject.data.storage.TestStorage;

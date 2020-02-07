@@ -62,6 +62,7 @@ public class HomeFragment extends Fragment implements OnMapLongClickListener,OnM
         mMap.moveCamera(CameraUpdateFactory.zoomTo(16));
         mMap.setOnMapClickListener(this);
         mMap.setOnMarkerClickListener(this);
+        mMap.setOnMapLongClickListener(this);
     }
 
     @Override
@@ -81,7 +82,7 @@ public class HomeFragment extends Fragment implements OnMapLongClickListener,OnM
     public boolean onMarkerClick(Marker marker) {
         PostDetailFragment postDetail = new PostDetailFragment();
         Bundle bundle = new Bundle();
-        bundle.putString("tweeitId", (String) marker.getTag());
+        bundle.putSerializable("tweeit", (Tweeit) marker.getTag());
         postDetail.setArguments(bundle);
         FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.nav_host_fragment, postDetail);
@@ -111,10 +112,12 @@ public class HomeFragment extends Fragment implements OnMapLongClickListener,OnM
                     options.draggable(false);
                     //options.anchor(tweeit.getUserId());
                     //options.getIcon(tweeit.getImagePath());
-                    mMap.addMarker(options).setTag(tweeit.getTweeitId());
+                    mMap.addMarker(options).setTag(tweeit);
                 }
             }
         });
         super.onViewStateRestored(savedInstanceState);
     }
+
+
 }

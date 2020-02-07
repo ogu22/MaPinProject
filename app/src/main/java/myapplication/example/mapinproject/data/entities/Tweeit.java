@@ -2,17 +2,20 @@ package myapplication.example.mapinproject.data.entities;
 
 import com.google.firebase.database.IgnoreExtraProperties;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @IgnoreExtraProperties
-public class Tweeit {
+public class Tweeit implements Serializable {
+
 
     private String tweeitId;
     private String userId;
-    private ArrayList<Tag> tags;
+    private List<Tag> tags;
     private Location locations;
-    private ArrayList<Reply> replies;
+    private List<Reply> replies;
     private String tweeitTitle;
     private String tweeit;
     private String imagePath;
@@ -44,15 +47,24 @@ public class Tweeit {
         return userId;
     }
 
-    public ArrayList<Tag> getTags() {
+    public List<Tag> getTags() {
         return tags;
+    }
+
+    public String getTagString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (Tag tag : tags) {
+            //TODO 空白でよいのか検討
+            stringBuilder.append(tag.getTag()).append(" ");
+        }
+        return stringBuilder.toString();
     }
 
     public Location getLocations() {
         return locations;
     }
 
-    public ArrayList<Reply> getReplies() {
+    public List<Reply> getReplies() {
         return replies;
     }
 
@@ -74,6 +86,23 @@ public class Tweeit {
 
     public int getEvaluation() {
         return evaluation;
+    }
+
+    public String getRating() {
+        switch (this.evaluation) {
+            case 1:
+                return "★☆☆☆☆";
+            case 2:
+                return "★★☆☆☆";
+            case 3:
+                return "★★★☆☆";
+            case 4:
+                return "★★★★☆";
+            case 5:
+                return "★★★★★";
+            default:
+                return "☆☆☆☆☆";
+        }
     }
 
     @Override

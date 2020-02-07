@@ -47,7 +47,7 @@
         <activity android:name=".business.activities.LoginActivity"/>
         <activity android:name=".business.locset.LocsetActivity"/>
     </application>
-    
+
     <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

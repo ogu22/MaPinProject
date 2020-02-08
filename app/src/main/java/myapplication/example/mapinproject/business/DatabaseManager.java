@@ -38,14 +38,15 @@ public class DatabaseManager {
         ref.setValue(tag);
     }
 
-    public static void getTag(String tagId ,final TagCallBack databaseCallback) {
+    public static void getTag(String tagId, final TagCallBack databaseCallback) {
         database = FirebaseDatabase.getInstance();
         DatabaseReference ref = database.getReference("tag").child(tagId);
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                GenericTypeIndicator<HashMap<String,Tag>> indicator = new GenericTypeIndicator<HashMap<String, Tag>>() {};
-                HashMap<String,Tag> value = dataSnapshot.getValue(indicator);
+                GenericTypeIndicator<HashMap<String, Tag>> indicator = new GenericTypeIndicator<HashMap<String, Tag>>() {
+                };
+                HashMap<String, Tag> value = dataSnapshot.getValue(indicator);
                 databaseCallback.getTagCallBack(value);
             }
 
@@ -63,14 +64,15 @@ public class DatabaseManager {
         ref.setValue(user);
     }
 
-    public static void getUser(String userId,final UserCallBack databaseCallback) {
+    public static void getUser(String userId, final UserCallBack databaseCallback) {
         database = FirebaseDatabase.getInstance();
         DatabaseReference ref = database.getReference("user").child(userId);
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                GenericTypeIndicator<HashMap<String,User>> indicator = new GenericTypeIndicator<HashMap<String, User>>() {};
-                HashMap<String,User> value = dataSnapshot.getValue(indicator);
+                GenericTypeIndicator<HashMap<String, User>> indicator = new GenericTypeIndicator<HashMap<String, User>>() {
+                };
+                HashMap<String, User> value = dataSnapshot.getValue(indicator);
                 databaseCallback.getUserCallBack(value);
             }
 
@@ -94,8 +96,9 @@ public class DatabaseManager {
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                GenericTypeIndicator<HashMap<String,Reply>> indicator = new GenericTypeIndicator<HashMap<String, Reply>>() {};
-                HashMap<String,Reply> value = dataSnapshot.getValue(indicator);
+                GenericTypeIndicator<HashMap<String, Reply>> indicator = new GenericTypeIndicator<HashMap<String, Reply>>() {
+                };
+                HashMap<String, Reply> value = dataSnapshot.getValue(indicator);
                 databaseCallback.getReplyCallBack(value);
             }
 
@@ -119,8 +122,9 @@ public class DatabaseManager {
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                GenericTypeIndicator<HashMap<String,Tweeit>> indicator = new GenericTypeIndicator<HashMap<String, Tweeit>>() {};
-                HashMap<String,Tweeit> value = dataSnapshot.getValue(indicator);
+                GenericTypeIndicator<HashMap<String, Tweeit>> indicator = new GenericTypeIndicator<HashMap<String, Tweeit>>() {
+                };
+                HashMap<String, Tweeit> value = dataSnapshot.getValue(indicator);
                 databaseCallback.getTweeitCallBack(value);
             }
 
@@ -140,9 +144,10 @@ public class DatabaseManager {
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                GenericTypeIndicator<HashMap<String,Tweeit>> indicator = new GenericTypeIndicator<HashMap<String, Tweeit>>() {};
-                HashMap<String,Tweeit> value = dataSnapshot.getValue(indicator);
-                if (value == null){
+                GenericTypeIndicator<HashMap<String, Tweeit>> indicator = new GenericTypeIndicator<HashMap<String, Tweeit>>() {
+                };
+                HashMap<String, Tweeit> value = dataSnapshot.getValue(indicator);
+                if (value == null) {
                     databaseCallback.getTweeitCallBack(new HashMap<String, Tweeit>());
                 } else {
                     databaseCallback.getTweeitCallBack(value);
@@ -168,6 +173,11 @@ public class DatabaseManager {
         //FIXME: ダウンロードURLの取得
         storageRef.putFile(filePath).addOnFailureListener(failureListener);
         storageRef.getDownloadUrl().addOnSuccessListener(successListener);
+    }
+
+    public static void getImage(String url) {
+        storage = FirebaseStorage.getInstance();
+
     }
 
 }

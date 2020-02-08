@@ -97,9 +97,9 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.searchbutton:
                 fab.setVisibility(View.GONE);
-                FragmentTransaction post = getSupportFragmentManager().beginTransaction();
-                post.replace(R.id.nav_host_fragment, new SearchFragment());
-                post.commit();
+                FragmentTransaction search = getSupportFragmentManager().beginTransaction();
+                search.replace(R.id.nav_host_fragment, new SearchFragment());
+                search.commit();
                 break;
 
         }

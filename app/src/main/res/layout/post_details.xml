@@ -30,12 +30,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <Button
-                android:id="@+id/post_back_button"
-                android:layout_width="80dp"
-                android:layout_height="wrap_content"
-                android:text="戻る" />
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -45,19 +39,18 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="100dp"
+                    android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
                     <ImageView
                         android:id="@+id/post_user_image"
-                        android:layout_width="150dp"
-                        android:layout_height="100dp"
-                        android:layout_weight="1"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
                         tools:srcCompat="@tools:sample/avatars" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/layout_margin_8"
                         android:layout_weight="1"
                         android:orientation="vertical">
@@ -65,8 +58,7 @@
                         <TextView
                             android:id="@+id/pin_name"
                             android:layout_width="match_parent"
-                            android:layout_height="30dp"
-                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
                             android:text="TextView"
                             android:textAppearance="@style/TextAppearance.AppCompat.Large"
                             tools:text="ピンの場所" />
@@ -74,17 +66,17 @@
                         <TextView
                             android:id="@+id/post_rating"
                             android:layout_width="match_parent"
-                            android:layout_height="24dp"
-                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
                             android:text="TextView"
+                            android:textSize="12sp"
                             tools:text="★★★★★" />
 
                         <TextView
                             android:id="@+id/post_date"
                             android:layout_width="match_parent"
-                            android:layout_height="24dp"
-                            android:layout_weight="1"
-                            android:text="yyyy年mm月dd日 HH:mm:dd" />
+                            android:layout_height="wrap_content"
+                            android:text="yyyy年mm月dd日 HH時mm分dd秒"
+                            android:textSize="12sp" />
                     </LinearLayout>
 
                 </LinearLayout>
@@ -106,7 +98,7 @@
                 <TextView
                     android:id="@+id/post_comment"
                     android:layout_width="match_parent"
-                    android:layout_height="100dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/layout_margin_8"
                     android:text="ピンに対してのコメント" />
 

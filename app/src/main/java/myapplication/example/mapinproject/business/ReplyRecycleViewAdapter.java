@@ -38,7 +38,8 @@ public class ReplyRecycleViewAdapter extends RecyclerView.Adapter<ReplyViewHolde
 
     @Override
     public void onBindViewHolder(ReplyViewHolder holder, int position) {
-        new DownloadImageTask(holder.imageView).execute(list.get(position).getReplayUserImagePath().toString());
+        new DownloadImageTask(holder.imageView).execute(list.get(position).getReplayUserImagePath());
+        holder.replyDate.setText(list.get(position).getReplayDate());
         holder.detailView.setText(list.get(position).getContent());
         holder.titleView.setText(list.get(position).getReplayUserName());
     }

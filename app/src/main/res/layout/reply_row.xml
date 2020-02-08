@@ -12,26 +12,56 @@
 
         <ImageView
             android:id="@+id/reply_user_image"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/image_radius"
             android:src="@mipmap/ic_launcher" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="80dp"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/reply_user_name"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="0.2" />
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/reply_user_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/layout_margin_4"
+                    android:layout_marginEnd="@dimen/layout_margin_4"
+                    android:layout_weight="0.7"
+                    android:focusableInTouchMode="false"
+                    android:forceHasOverlappingRendering="false"
+                    android:text="ほげほげくん"
+                    android:textAllCaps="false"
+                    android:textIsSelectable="false"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/reply_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/layout_margin_4"
+                    android:layout_weight="0.3"
+                    android:focusableInTouchMode="false"
+                    android:gravity="right"
+                    android:text="2020年12月12日 12時12分12秒"
+                    android:textSize="10sp" />
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/reply_message"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="0.8" />
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/layout_margin_4"
+                android:layout_marginEnd="@dimen/layout_margin_4"
+                android:text="replyContent"
+                android:textSize="12sp" />
 
         </LinearLayout>
 

@@ -66,7 +66,6 @@ import static android.content.Context.INPUT_METHOD_SERVICE;
 public class PostDetailFragment extends Fragment {
 
     private static final int RESULT_PICK_IMAGEFILE = 1000;
-    private Button backButton;
     private ImageView postUserImage;
     private TextView pinName;
     private TextView postRating;
@@ -102,17 +101,6 @@ public class PostDetailFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.post_details, null, false);
-        backButton = view.findViewById(R.id.post_back_button);
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //戻る処理
-                FragmentManager fragmentManager = getParentFragmentManager();
-                if (fragmentManager != null) {
-                    fragmentManager.popBackStack();
-                }
-            }
-        });
         postUserImage = view.findViewById(R.id.post_user_image);
         pinName = view.findViewById(R.id.pin_name);
         postRating = view.findViewById(R.id.post_rating);

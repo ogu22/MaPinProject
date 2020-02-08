@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Paint;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -17,10 +18,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.provider.MediaStore;
+import android.text.Layout;
+import android.text.util.Linkify;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -48,6 +53,7 @@ import myapplication.example.mapinproject.business.DatabaseManager;
 import myapplication.example.mapinproject.business.ReplyItemDecoration;
 import myapplication.example.mapinproject.business.ReplyRecycleViewAdapter;
 import myapplication.example.mapinproject.business.TweeitCallback;
+import myapplication.example.mapinproject.business.Util;
 import myapplication.example.mapinproject.data.entities.Location;
 import myapplication.example.mapinproject.data.entities.Reply;
 import myapplication.example.mapinproject.data.entities.Tag;
@@ -55,6 +61,7 @@ import myapplication.example.mapinproject.data.entities.Tweeit;
 import myapplication.example.mapinproject.ui.postadd.PostAddFragment;
 
 import static android.app.Activity.RESULT_OK;
+import static android.content.Context.INPUT_METHOD_SERVICE;
 
 public class PostDetailFragment extends Fragment {
 
@@ -68,8 +75,16 @@ public class PostDetailFragment extends Fragment {
     private TextView tagText;
     private TextView postComment;
 
+    private ImageView replyImageView;
+    private EditText replayInputText;
+    private Button replyImageAddButton;
+    private Button replyPostButton;
+
+    private Uri filePath;
+
     private Tweeit tweeit;
-    private ProgressDialog progressDialog;
+    private List<Reply> replies;
+    private ReplyRecycleViewAdapter adapter;
 
     public static PostDetailFragment newInstance() {
         PostDetailFragment fragment = new PostDetailFragment();
@@ -86,7 +101,7 @@ public class PostDetailFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.post_details, null, false);
+        final View view = inflater.inflate(R.layout.post_details, null, false);
         backButton = view.findViewById(R.id.post_back_button);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -104,10 +119,57 @@ public class PostDetailFragment extends Fragment {
         postDate = view.findViewById(R.id.post_date);
         postImage = view.findViewById(R.id.post_image);
         tagText = view.findViewById(R.id.tag_text);
+        tagText.setPaintFlags(tagText.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         postComment = view.findViewById(R.id.post_comment);
+
+        replyImageView = view.findViewById(R.id.reply_post_image_view);
+        replyImageAddButton = view.findViewById(R.id.reply_image_add_button);
+        replyImageAddButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+                intent.addCategory(Intent.CATEGORY_OPENABLE);
+                intent.setType("image/*");
+                intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+                startActivityForResult(intent, RESULT_PICK_IMAGEFILE);
+            }
+        });
+        replayInputText = view.findViewById(R.id.reply_input_i_text);
+        replyPostButton = view.findViewById(R.id.reply_post_button);
+        replyPostButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String replyId = UUID.randomUUID().toString();
+                String replayUserName = "ごんちゃん";
+                String replayDate = Util.getDate();
+                String content = replayInputText.getText().toString();
+                //TODO:イメージのアップロード
+                String imagePath = "";
+                String myProfileImageUri = "";
+
+                Reply reply = new Reply(replyId,replayUserName,myProfileImageUri,replayDate,content,imagePath);
+                tweeit.addReplies(reply);
+                DatabaseManager.addTweeit(tweeit);
+
+                InputMethodManager inputMethodMgr = (InputMethodManager) getActivity().getSystemService(INPUT_METHOD_SERVICE);
+                inputMethodMgr.hideSoftInputFromWindow(v.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+
+                int insertIndex = 0;
+                replies.add(insertIndex,reply);
+
+                replayInputText.setText("");
+                view.findViewById(R.id.reply_input_detail_layout).setVisibility(View.GONE);
+            }
+        });
+        replayInputText.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
+            @Override
+            public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
+                view.findViewById(R.id.reply_input_detail_layout).setVisibility(View.VISIBLE);
+            }
+        });
         RecyclerView rv = view.findViewById(R.id.reply_recycler_view);
-        ReplyRecycleViewAdapter adapter = new ReplyRecycleViewAdapter(this.createDataset());
-        //ReplyRecycleViewAdapter adapter = new ReplyRecycleViewAdapter(tweeit.getReplies());
+        replies = tweeit.getReplies();
+        adapter = new ReplyRecycleViewAdapter(replies);
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
         rv.setHasFixedSize(true);
         rv.addItemDecoration(ReplyItemDecoration.createDefaultDecoration(getActivity()));
@@ -116,17 +178,6 @@ public class PostDetailFragment extends Fragment {
         return view;
     }
 
-    //テストデータ
-    private List<Reply> createDataset() {
-        List<Reply> dataset = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
-            Uri uri = Uri.parse("https://cdn.iconscout.com/icon/free/png-256/cat-154-450078.png");
-            Reply data = new Reply(String.valueOf(i),"gonchan",uri,"2020年12月24日 12時22分34秒","ほげほげ",uri);
-
-            dataset.add(data);
-        }
-        return dataset;
-    }
 
     @Override
     public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
@@ -137,6 +188,7 @@ public class PostDetailFragment extends Fragment {
         postRating.setText(tweeit.getRating());
         postDate.setText(tweeit.getTimestamp());
         tagText.setText(tweeit.getTagString());
+        replies = tweeit.getReplies();
         //FIXME ぬルポ
         new DownloadImageTask(postImage).execute(tweeit.getImagePath());
         postComment.setText(tweeit.getTweeit());
@@ -164,6 +216,21 @@ public class PostDetailFragment extends Fragment {
 
         protected void onPostExecute(Bitmap result) {
             bmImage.setImageBitmap(result);
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode,int resultCode,Intent data) {
+        super.onActivityResult(requestCode,resultCode,data);
+        if (requestCode == RESULT_PICK_IMAGEFILE && resultCode == RESULT_OK && data != null && data.getData() != null) {
+            filePath = data.getData();
+            try {
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(),filePath);
+                replyImageView.setImageBitmap(bitmap);
+                replyImageView.setVisibility(View.VISIBLE);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

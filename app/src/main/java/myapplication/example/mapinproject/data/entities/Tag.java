@@ -2,10 +2,11 @@ package myapplication.example.mapinproject.data.entities;
 
 import com.google.firebase.database.IgnoreExtraProperties;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 @IgnoreExtraProperties
-public class Tag {
+public class Tag implements Serializable {
     private String tagId;
     private String tag;
 

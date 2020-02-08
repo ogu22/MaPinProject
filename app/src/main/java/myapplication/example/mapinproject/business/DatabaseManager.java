@@ -166,7 +166,8 @@ public class DatabaseManager {
         String uuid = UUID.randomUUID().toString();
         StorageReference storageRef = storage.getReference().child("images").child(uuid);
         //FIXME: ダウンロードURLの取得
-        storageRef.putFile(filePath).addOnSuccessListener(successListener).addOnFailureListener(failureListener);
+        storageRef.putFile(filePath).addOnFailureListener(failureListener);
+        storageRef.getDownloadUrl().addOnSuccessListener(successListener);
     }
 
 }

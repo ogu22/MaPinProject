@@ -57,7 +57,6 @@ public class HomeFragment extends Fragment implements OnMapLongClickListener,OnM
 
         // Add a marker in Sydney and move the camera
         LatLng sapporo = new LatLng(43.068625, 141.350801);
-        mMap.addMarker(new MarkerOptions().position(sapporo).title("Marker in Sapporo!"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sapporo));
         mMap.moveCamera(CameraUpdateFactory.zoomTo(16));
         mMap.setOnMapClickListener(this);

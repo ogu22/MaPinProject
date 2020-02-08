@@ -4,21 +4,22 @@ import android.net.Uri;
 
 import com.google.firebase.database.IgnoreExtraProperties;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 @IgnoreExtraProperties
-public class Reply {
+public class Reply implements Serializable {
     private String replayId;
     private String replayUserName;
-    private Uri replayUserImagePath;
+    private String replayUserImagePath;
     private String replayDate;
     private String content;
-    private Uri imagePath;
+    private String imagePath;
 
     public Reply() {
     }
 
-    public Reply(String replayId, String replayUserName, Uri replayUserImagePath, String replayDate, String content, Uri imagePath) {
+    public Reply(String replayId, String replayUserName, String replayUserImagePath, String replayDate, String content, String imagePath) {
         this.replayId = replayId;
         this.replayUserName = replayUserName;
         this.replayUserImagePath = replayUserImagePath;
@@ -35,7 +36,7 @@ public class Reply {
         return replayUserName;
     }
 
-    public Uri getReplayUserImagePath() {
+    public String getReplayUserImagePath() {
         return replayUserImagePath;
     }
 
@@ -47,7 +48,7 @@ public class Reply {
         return content;
     }
 
-    public Uri getImagePath() {
+    public String getImagePath() {
         return imagePath;
     }
 

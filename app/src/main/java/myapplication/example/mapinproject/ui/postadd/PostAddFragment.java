@@ -28,6 +28,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.IOException;
+import java.net.URI;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -36,6 +37,7 @@ import java.util.UUID;
 
 import myapplication.example.mapinproject.R;
 import myapplication.example.mapinproject.business.DatabaseManager;
+import myapplication.example.mapinproject.business.Util;
 import myapplication.example.mapinproject.business.activities.HomeActivity;
 import myapplication.example.mapinproject.business.activities.Post_OriginalActivity;
 import myapplication.example.mapinproject.business.fragments.PostDoneDialog;
@@ -104,7 +106,7 @@ public class PostAddFragment extends Fragment {
                 DatabaseManager.addImage(filePath, new OnSuccessListener() {
                     @Override
                     public void onSuccess(Object o) {
-                        test((UploadTask.TaskSnapshot) o);
+                        test((URI) o);
                     }
                 }, new OnFailureListener() {
                     @Override
@@ -115,12 +117,11 @@ public class PostAddFragment extends Fragment {
 
             }
 
-            private void test(UploadTask.TaskSnapshot o) {
+            private void test(URI o) {
                 //TODO: ここらへんリファクタリングしたい...
                 String uploadedUrl = "";
                 if (o != null) {
-                    UploadTask.TaskSnapshot taskSnapshot = o;
-                    uploadedUrl = taskSnapshot.getUploadSessionUri().toString();
+                    uploadedUrl = o.toString();
                 }
                 FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
                 String uuid = UUID.randomUUID().toString();
@@ -140,8 +141,7 @@ public class PostAddFragment extends Fragment {
                 ArrayList<Reply> replies = new ArrayList<>();
                 String title = locationText.getText().toString();
                 String content = contentText.getText().toString();
-                Date date = new Date();
-                String dateFormat = new SimpleDateFormat("yyyy年MM月dd日 hh時mm分ss秒").format(date);
+                String dateFormat = Util.getDate();
                 int num = ratingBar.getNumStars();
 
                 Tweeit tweeit = new Tweeit(uuid, userId, tags, location, replies, title, content, uploadedUrl, dateFormat, num);

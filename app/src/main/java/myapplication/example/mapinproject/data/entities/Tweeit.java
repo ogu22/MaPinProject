@@ -65,7 +65,17 @@ public class Tweeit implements Serializable {
     }
 
     public List<Reply> getReplies() {
+        if (replies == null) {
+            replies = new ArrayList<>();
+        }
         return replies;
+    }
+
+    public void addReplies(Reply reply) {
+        if (replies == null) {
+            replies = new ArrayList<>();
+        }
+        replies.add(reply);
     }
 
     public String getTweeitTitle() {

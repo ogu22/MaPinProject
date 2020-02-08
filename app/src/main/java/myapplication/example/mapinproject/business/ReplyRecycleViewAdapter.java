@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 import myapplication.example.mapinproject.R;
@@ -21,6 +22,10 @@ public class ReplyRecycleViewAdapter extends RecyclerView.Adapter<ReplyViewHolde
     private List<Reply> list;
 
     public ReplyRecycleViewAdapter(List<Reply> list) {
+        if (list == null) {
+            this.list = new ArrayList<>();
+            return;
+        }
         this.list = list;
     }
 

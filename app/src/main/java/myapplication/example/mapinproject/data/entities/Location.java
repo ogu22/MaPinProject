@@ -2,10 +2,11 @@ package myapplication.example.mapinproject.data.entities;
 
 import com.google.firebase.database.IgnoreExtraProperties;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 @IgnoreExtraProperties
-public class Location {
+public class Location implements Serializable {
     private String latitude;
     private String longitude;
 

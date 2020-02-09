@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.auth.FirebaseAuth;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -90,12 +91,14 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         int itemId = item.getItemId();
         FloatingActionButton fab = findViewById(R.id.fab);
         switch (itemId) {
-            // ログアウトタップ
             case R.id.action_logout:
+                // ログアウトタップ
+                FirebaseAuth.getInstance().signOut();
                 Intent intent = new Intent(this, LoginActivity.class);
                 startActivity(intent);
                 break;
             case R.id.searchbutton:
+                // 検索タップ
                 fab.setVisibility(View.GONE);
                 FragmentTransaction search = getSupportFragmentManager().beginTransaction();
                 search.replace(R.id.nav_host_fragment, new SearchFragment());

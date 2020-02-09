@@ -54,11 +54,8 @@ public class HomeFragment extends Fragment implements OnMapLongClickListener,OnM
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-
-        // Add a marker in Sydney and move the camera
-        LatLng sapporo = new LatLng(43.068625, 141.350801);
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sapporo));
-        mMap.moveCamera(CameraUpdateFactory.zoomTo(16));
+        // 参照 -> https://developers.google.com/android/reference/com/google/android/gms/maps/GoogleMap
+        mMap.setMyLocationEnabled(true);
         mMap.setOnMapClickListener(this);
         mMap.setOnMarkerClickListener(this);
         mMap.setOnMapLongClickListener(this);

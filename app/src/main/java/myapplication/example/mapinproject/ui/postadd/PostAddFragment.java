@@ -18,38 +18,24 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import com.google.android.gms.tasks.Continuation;
-import com.google.android.gms.tasks.OnCanceledListener;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
+
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.storage.UploadTask;
 
 import java.io.IOException;
-import java.net.URI;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.UUID;
 
 import myapplication.example.mapinproject.R;
 import myapplication.example.mapinproject.business.DatabaseManager;
 import myapplication.example.mapinproject.business.Util;
-import myapplication.example.mapinproject.business.activities.HomeActivity;
-import myapplication.example.mapinproject.business.activities.Post_OriginalActivity;
-import myapplication.example.mapinproject.business.fragments.PostDoneDialog;
-import myapplication.example.mapinproject.business.fragments.Post_DeleteDialog;
 import myapplication.example.mapinproject.data.entities.Location;
 import myapplication.example.mapinproject.data.entities.Reply;
 import myapplication.example.mapinproject.data.entities.Tag;
 import myapplication.example.mapinproject.data.entities.Tweeit;
-import myapplication.example.mapinproject.data.storage.PostStorage;
 
 import static android.app.Activity.RESULT_OK;
 

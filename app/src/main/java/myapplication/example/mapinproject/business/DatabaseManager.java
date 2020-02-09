@@ -175,6 +175,8 @@ public class DatabaseManager {
         String uuid = UUID.randomUUID().toString();
         final StorageReference storageRef = storage.getReference().child("images").child(uuid);
         UploadTask uploadTask = storageRef.putFile(filePath);
+
+        @SuppressWarnings("unchecked")
         Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
             @Override
             public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {

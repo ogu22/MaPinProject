@@ -26,12 +26,12 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.registration);
+        setContentView(R.layout.registration_user);
 
-        mEmailField = findViewById(R.id.emailField);
-        mPassField = findViewById(R.id.passwdField);
+        mEmailField = findViewById(R.id.register_email_field);
+        mPassField = findViewById(R.id.register_passwd_field);
 
-        findViewById(R.id.registration_button).setOnClickListener(this);
+        findViewById(R.id.registration_user_button).setOnClickListener(this);
 
         mAuth = FirebaseAuth.getInstance();
     }
@@ -39,7 +39,7 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.registration_button:
+            case R.id.registration_user_button:
                 createAccount(mEmailField.getText().toString(), mPassField.getText().toString());
                 break;
         }
@@ -55,7 +55,7 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            changeLoginActivity();
+                            changeHomeActivity();
                         } else {
                             Toast.makeText(RegistrationActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                         }
@@ -85,8 +85,8 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
         return valid;
     }
 
-    private void changeLoginActivity() {
-        Intent intent = new Intent(RegistrationActivity.this, LoginActivity.class);
+    private void changeHomeActivity() {
+        Intent intent = new Intent(RegistrationActivity.this, HomeActivity.class);
         startActivity(intent);
     }
 }

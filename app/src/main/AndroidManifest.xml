@@ -31,7 +31,7 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".business.activities.HomeActivity"
+            android:name=".business.activities.LoginActivity"
             android:label="Mapin"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -42,9 +42,10 @@
 <!--        <activity android:name=".business.activities.TestActivity"/>-->
         <activity android:name=".business.activities.Post_ChangeActivity"/>
         <activity android:name=".business.activities.Post_DeleteActivity"/>
-<!--        <activity android:name=".business.activities.HomeActivity"/>-->
+        <activity android:name=".business.activities.HomeActivity"/>
         <activity android:name=".business.activities.Pin_infoActivity"/>
-        <activity android:name=".business.activities.LoginActivity"/>
+        <activity android:name=".business.activities.RegistrationActivity"/>
+<!--        <activity android:name=".business.activities.LoginActivity"/>-->
         <activity android:name=".business.locset.LocsetActivity"/>
     </application>
 

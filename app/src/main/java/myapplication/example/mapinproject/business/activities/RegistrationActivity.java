@@ -16,9 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import myapplication.example.mapinproject.R;
 
-public class RegistrationActivity extends AppCompatActivity implements View.OnClickListener {
-
-    private FirebaseAuth mAuth;
+public class RegistrationActivity extends BaseLoginActivity implements View.OnClickListener {
 
     private EditText mEmailField;
     private EditText mPassField;
@@ -32,8 +30,6 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
         mPassField = findViewById(R.id.register_passwd_field);
 
         findViewById(R.id.registration_user_button).setOnClickListener(this);
-
-        mAuth = FirebaseAuth.getInstance();
     }
 
     @Override
@@ -43,50 +39,5 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
                 createAccount(mEmailField.getText().toString(), mPassField.getText().toString());
                 break;
         }
-    }
-
-    private void createAccount(String email, String password) {
-        if (!validateForm()) {
-            return;
-        }
-
-        mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            changeHomeActivity();
-                        } else {
-                            Toast.makeText(RegistrationActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-    }
-
-    private boolean validateForm() {
-        boolean valid = true;
-
-        String email = mEmailField.getText().toString();
-        if (TextUtils.isEmpty(email)) {
-            mEmailField.setError("Required.");
-            valid = false;
-        } else {
-            mEmailField.setError(null);
-        }
-
-        String password = mPassField.getText().toString();
-        if (TextUtils.isEmpty(password)) {
-            mPassField.setError("Required.");
-            valid = false;
-        } else {
-            mPassField.setError(null);
-        }
-
-        return valid;
-    }
-
-    private void changeHomeActivity() {
-        Intent intent = new Intent(RegistrationActivity.this, HomeActivity.class);
-        startActivity(intent);
     }
 }

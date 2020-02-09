@@ -5,8 +5,11 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.google.android.gms.tasks.Continuation;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -15,6 +18,7 @@ import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.util.HashMap;
 import java.util.UUID;
@@ -162,17 +166,26 @@ public class DatabaseManager {
         });
     }
 
-    public static void addImage(Uri filePath, OnSuccessListener successListener, OnFailureListener failureListener) {
+    public static void addImage(Uri filePath ,OnFailureListener failureListener ,OnCompleteListener completeListener) {
         if (filePath == null) {
             //画像がない場合
             failureListener.onFailure(new Exception());
         }
         storage = FirebaseStorage.getInstance();
         String uuid = UUID.randomUUID().toString();
-        StorageReference storageRef = storage.getReference().child("images").child(uuid);
-        //FIXME: ダウンロードURLの取得
-        storageRef.putFile(filePath).addOnFailureListener(failureListener);
-        storageRef.getDownloadUrl().addOnSuccessListener(successListener);
+        final StorageReference storageRef = storage.getReference().child("images").child(uuid);
+        UploadTask uploadTask = storageRef.putFile(filePath);
+        Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+            @Override
+            public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                if (!task.isSuccessful()) {
+                    throw task.getException();
+                }
+
+                // Continue with the task to get the download URL
+                return storageRef.getDownloadUrl();
+            }
+        }).addOnCompleteListener(completeListener);
     }
 
     public static void getImage(String url) {

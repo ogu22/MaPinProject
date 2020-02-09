@@ -32,14 +32,10 @@ import myapplication.example.mapinproject.R;
 
 import com.google.firebase.auth.FacebookAuthProvider;
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
+public class LoginActivity extends BaseLoginActivity implements View.OnClickListener {
 
-    private FirebaseAuth mAuth;
-    private static final String TAG = "FacebookLoginActivity";
     private EditText mEmailField;
     private EditText mPassField;
-    OAuthProvider.Builder provider = OAuthProvider.newBuilder("twitter.com");
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,15 +48,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         findViewById(R.id.registration_button).setOnClickListener(this);
         findViewById(R.id.emailSignUpButton).setOnClickListener(this);
         findViewById(R.id.nbutton2).setOnClickListener(this);
-//        findViewById(R.id.facebookbutton).setOnClickListener(this);
-        mAuth = FirebaseAuth.getInstance();
 
-        provider.addCustomParameter("lang", "fr");
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+        //ログインチェック
+        if (isLogin()){
+            changeHomeActivity();
+        }
     }
 
     @Override
@@ -79,78 +71,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 break;
             case R.id.nbutton2:
                 //Twitterログインボタン
-                checkpoint();
                 break;
         }
     }
 
-    private void signIn(String email, String password) {
-        if (!validateForm()) {
-            return;
-        }
-
-        mAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            //ログイン完了
-                            changeHomeActivity();
-                        } else {
-                            //ログイン失敗
-                            Toast.makeText(LoginActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-    }
-
-    private boolean validateForm() {
-        String email = mEmailField.getText().toString();
-        if (TextUtils.isEmpty(email)) {
-            mEmailField.setError("Required.");
-            return false;
-        }
-        String password = mPassField.getText().toString();
-        if (TextUtils.isEmpty(password)) {
-            mPassField.setError("Required.");
-            return false;
-        }
-        return true;
-    }
-
-    private void changeHomeActivity() {
-        Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-        startActivity(intent);
-    }
-
-    private void changeRegistrationActivity() {
-        Intent intent = new Intent(LoginActivity.this, RegistrationActivity.class);
-        startActivity(intent);
-    }
-
-    private void checkpoint() {
-        Task<AuthResult> pendingResultTask = mAuth.getPendingAuthResult();
-        if (pendingResultTask != null) {
-            // There's something already here! Finish the sign-in for your user.
-            pendingResultTask
-                    .addOnSuccessListener(
-                            new OnSuccessListener<AuthResult>() {
-                                @Override
-                                public void onSuccess(AuthResult authResult) {
-                                    // Handle Success.
-                                }
-                            })
-                    .addOnFailureListener(
-                            new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    // Handle failure.
-                                }
-                            });
-        } else {
-            // There's no pending result so you need to start the sign-in flow.
-            // See below.
-        }
-
+    private boolean isLogin() {
+        FirebaseUser prevUser = FirebaseAuth.getInstance().getCurrentUser();
+        return  (prevUser != null) ;
     }
 }

@@ -18,9 +18,12 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCanceledListener;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -103,21 +106,27 @@ public class PostAddFragment extends Fragment {
         view.findViewById(R.id.post_send_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DatabaseManager.addImage(filePath, new OnSuccessListener() {
-                    @Override
-                    public void onSuccess(Object o) {
-                        test((URI) o);
-                    }
-                }, new OnFailureListener() {
+                DatabaseManager.addImage(filePath, new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
+                        //画像がない場合
                         test(null);
                     }
+                }, new OnCompleteListener<Uri>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Uri> task) {
+                        if (task.isSuccessful()) {
+                            Uri downloadUri = task.getResult();
+                            test(downloadUri);
+                        } else {
+                            // Handle failures
+                            // ...
+                        }
+                    }
                 });
-
             }
 
-            private void test(URI o) {
+            private void test(Uri o) {
                 //TODO: ここらへんリファクタリングしたい...
                 String uploadedUrl = "";
                 if (o != null) {

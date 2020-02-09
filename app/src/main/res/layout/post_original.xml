@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/postoriginal"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -16,98 +17,62 @@
             android:layout_height="wrap_content"
             android:background="#FFFFFF">
 
-            <com.google.android.gms.maps.MapView
-                android:id="@+id/mapView"
-                android:layout_width="352dp"
-                android:layout_height="162dp"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="15dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/post_image_button" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-            <EditText
-                android:id="@+id/post_category_text"
-                android:layout_width="350dp"
-                android:layout_height="41dp"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="20dp"
-                android:ems="10"
-                android:gravity="start|top"
-                android:hint="カテゴリー"
-                android:inputType="textMultiLine"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/post_content_text" />
+                <EditText
+                    android:id="@+id/post_location_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="場所の名前"
+                    android:inputType="textPersonName" />
 
-            <RatingBar
-                android:id="@+id/ratingBar"
-                android:layout_width="244dp"
-                android:layout_height="52dp"
-                android:layout_marginStart="83dp"
-                android:layout_marginTop="21dp"
-                android:numStars="5"
-                android:stepSize="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/post_category_text" />
+                <EditText
+                    android:id="@+id/post_content_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="115dp"
+                    android:gravity="start|top"
+                    android:hint="内容"
+                    android:inputType="textMultiLine" />
 
-            <EditText
-                android:id="@+id/post_location_text"
-                android:layout_width="350dp"
-                android:layout_height="41dp"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="22dp"
-                android:ems="10"
-                android:hint="場所の名前"
-                android:inputType="textPersonName"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView10" />
+                <EditText
+                    android:id="@+id/post_category_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="41dp"
+                    android:hint="カテゴリー" />
 
-            <ImageButton
-                android:id="@+id/post_image_button"
-                android:layout_width="360dp"
-                android:layout_height="80dp"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="47dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/ratingBar"
-                app:srcCompat="@android:drawable/ic_menu_gallery" />
+                <RatingBar
+                    android:id="@+id/ratingBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:numStars="5"
+                    android:stepSize="0.5" />
 
-            <EditText
-                android:id="@+id/post_content_text"
-                android:layout_width="350dp"
-                android:layout_height="115dp"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="16dp"
-                android:ems="10"
-                android:gravity="start|top"
-                android:hint="内容"
-                android:inputType="textMultiLine"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/post_location_text" />
+                <ImageButton
+                    android:id="@+id/post_image_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    app:srcCompat="@android:drawable/ic_menu_gallery" />
 
-            <TextView
-                android:id="@+id/textView10"
-                android:layout_width="186dp"
-                android:layout_height="35dp"
-                android:layout_marginStart="114dp"
-                android:layout_marginTop="29dp"
-                android:layout_marginEnd="111dp"
-                android:text="オリジナル"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                <com.google.android.gms.maps.MapView
+                    android:id="@+id/mapView"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp" />
 
-            <Button
-                android:id="@+id/post_send_button"
-                android:layout_width="180dp"
-                android:layout_height="80dp"
-                android:layout_marginStart="114dp"
-                android:layout_marginTop="28dp"
-                android:layout_marginBottom="24dp"
-                android:text="送信"
-                android:textSize="50sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/mapView" />
+                <Button
+                    android:id="@+id/post_send_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="送信"
+                    android:textSize="24sp" />
+
+            </LinearLayout>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 

@@ -8,7 +8,6 @@ import androidx.annotation.NonNull;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -166,37 +165,14 @@ public class DatabaseManager {
         ref.setValue(tweeit);
     }
 
-    public static void getTweeit(String tweeitId, final TweeitCallback databaseCallback) {
-        database = FirebaseDatabase.getInstance();
-        DatabaseReference ref = database.getReference("tweeit").orderByChild("tweeitId").startAt(tweeitId).endAt(tweeitId).limitToFirst(1).getRef();
-        ref.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                GenericTypeIndicator<HashMap<String, Tweeit>> indicator = new GenericTypeIndicator<HashMap<String, Tweeit>>() {
-                };
-                HashMap<String, Tweeit> value = dataSnapshot.getValue(indicator);
-                databaseCallback.getTweeitCallBack(value);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.w(TAG, "getTweeit:onCancelled", databaseError.toException());
-                databaseCallback.getTweeitCallBack(new HashMap<String, Tweeit>());
-            }
-        });
-    }
-
-    public static void getTweeit(SearchConditions conditions, final TweeitCallback databaseCallback) {
+    public static void getTweeit(final SearchConditions conditions, final TweeitCallback databaseCallback) {
         database = FirebaseDatabase.getInstance();
         final DateRange range = conditions.getRange();
         final String searchWords = conditions.getSearchWords();
         final int rating = conditions.getRating();
         DatabaseReference ref = database.getReference("tweeit")
-                .orderByKey().startAt(range.getStartDate()).endAt(range.getEndDate())
-                .orderByChild("tweeit").startAt(searchWords).endAt(searchWords + "\uf8ff")
-                .orderByChild("rating").startAt(rating)
-                .getRef();
-        //TODO:検索条件を絞り込む
+                .orderByKey().startAt(range.getStartDate()).endAt(range.getEndDate()).getRef();
+
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -204,16 +180,16 @@ public class DatabaseManager {
                 };
                 HashMap<String, Tweeit> value = dataSnapshot.getValue(indicator);
                 if (value == null) {
-                    databaseCallback.getTweeitCallBack(new HashMap<String, Tweeit>());
+                    databaseCallback.getTweeitCallBack(new HashMap<String, Tweeit>(),conditions);
                 } else {
-                    databaseCallback.getTweeitCallBack(value);
+                    databaseCallback.getTweeitCallBack(value,conditions);
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 Log.w(TAG, "getTweeit:onCancelled", databaseError.toException());
-                databaseCallback.getTweeitCallBack(new HashMap<String, Tweeit>());
+                databaseCallback.getTweeitCallBack(new HashMap<String, Tweeit>(),conditions);
             }
         });
     }

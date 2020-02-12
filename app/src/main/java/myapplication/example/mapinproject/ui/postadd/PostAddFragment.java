@@ -27,15 +27,19 @@ import com.google.firebase.auth.FirebaseUser;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.UUID;
 
 import myapplication.example.mapinproject.R;
 import myapplication.example.mapinproject.business.DatabaseManager;
+import myapplication.example.mapinproject.business.TagCallBack;
 import myapplication.example.mapinproject.business.Util;
 import myapplication.example.mapinproject.data.entities.Location;
 import myapplication.example.mapinproject.data.entities.Reply;
 import myapplication.example.mapinproject.data.entities.Tag;
 import myapplication.example.mapinproject.data.entities.Tweeit;
+import myapplication.example.mapinproject.data.entities.User;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -64,7 +68,7 @@ public class PostAddFragment extends Fragment {
         Bundle bundle = getArguments();
         if (bundle != null) {
             latitude = String.valueOf(bundle.getDouble("latitude"));
-            longitude =String.valueOf(bundle.getDouble("longitude"));
+            longitude = String.valueOf(bundle.getDouble("longitude"));
         }
     }
 
@@ -119,12 +123,51 @@ public class PostAddFragment extends Fragment {
                     uploadedUrl = o.toString();
                 }
                 FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-                String uuid = UUID.randomUUID().toString();
+                final String uuid = UUID.randomUUID().toString();
                 String userId = currentUser.getUid();
 
-                Tag tag = new Tag(UUID.randomUUID().toString(), categoryText.getText().toString());
-                ArrayList<Tag> tags = new ArrayList<>();
+                //タグの処理
+                if (categoryText.getText() != null) {
+                    DatabaseManager.tagSearch(categoryText.getText().toString(), new TagCallBack() {
+                        @Override
+                        public void getTagCallBack(HashMap<String, Tag> map) {
+                            //タグ存在する、しない
+                            if (map.size() == 0) {
+                                List<String> tweetIdList = new ArrayList<>();
+                                tweetIdList.add(uuid);
+                                Tag tag = new Tag(UUID.randomUUID().toString(), categoryText.getText().toString(), tweetIdList);
+                                DatabaseManager.addTag(tag);
+                            } else {
+                                DatabaseManager.tagSearch(categoryText.getText().toString(), new TagCallBack() {
+                                    @Override
+                                    public void getTagCallBack(HashMap<String, Tag> map) {
+                                        List<String> tweeitIdList = new ArrayList<>();
+                                        String tagId = "";
+                                        String content = "";
+
+                                        for (Tag tag : map.values()) {
+                                            tweeitIdList = tag.getTweeitId();
+                                            tweeitIdList.add(uuid);
+                                            tagId = tag.getTagId();
+                                            content = tag.getTag();
+                                        }
+                                        Tag tag = new Tag(tagId, content, tweeitIdList);
+                                        DatabaseManager.addTag(tag);
+                                    }
+                                });
+
+                            }
+                        }
+                    });
+                }
+
+
+                List<Tag> tags = new ArrayList<>();
+                List<String> tweetIdList = new ArrayList<>();
+                tweetIdList.add(uuid);
+                Tag tag = new Tag(UUID.randomUUID().toString(), categoryText.getText().toString(), tweetIdList);
                 tags.add(tag);
+
                 for (Tag t : tags) {
                     DatabaseManager.addTag(t);
                 }
@@ -153,12 +196,12 @@ public class PostAddFragment extends Fragment {
     }
 
     @Override
-    public void onActivityResult(int requestCode,int resultCode,Intent data) {
-        super.onActivityResult(requestCode,resultCode,data);
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == RESULT_PICK_IMAGEFILE && resultCode == RESULT_OK && data != null && data.getData() != null) {
             filePath = data.getData();
             try {
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(),filePath);
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), filePath);
                 imageView.setImageBitmap(bitmap);
             } catch (IOException e) {
                 e.printStackTrace();

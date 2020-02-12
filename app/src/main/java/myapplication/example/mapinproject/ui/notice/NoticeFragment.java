@@ -10,10 +10,7 @@ import android.widget.Button;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
 import myapplication.example.mapinproject.R;
-import myapplication.example.mapinproject.business.activities.HomeActivity;
 
 public class NoticeFragment extends Fragment implements View.OnClickListener{
 
@@ -32,8 +29,8 @@ public class NoticeFragment extends Fragment implements View.OnClickListener{
 
         View view = inflater.inflate(R.layout.notification, null, false);
 
-        button2 = view.findViewById(R.id.button2);
-        view.findViewById(R.id.button2).setOnClickListener(this);
+        button2 = view.findViewById(R.id.button_search);
+        view.findViewById(R.id.button_search).setOnClickListener(this);
 
 
         return view;

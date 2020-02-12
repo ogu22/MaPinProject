@@ -7,7 +7,7 @@
     android:background="#FFFFFF">
 
     <SearchView
-        android:id="@+id/searchView2"
+        android:id="@+id/searchView"
         android:layout_width="348dp"
         android:layout_height="70dp"
         android:layout_marginStart="33dp"
@@ -18,37 +18,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Spinner
-        android:id="@+id/spinner1"
-        android:layout_width="200dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
-        android:entries="@array/list1"
-        app:layout_constraintStart_toEndOf="@+id/textView1"
-        app:layout_constraintTop_toBottomOf="@+id/searchView2" />
-
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="122dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="44dp"
-        android:layout_marginTop="32dp"
-        android:text="並べ替え"
-        android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchView2" />
-
     <TextView
         android:id="@+id/textView2"
         android:layout_width="122dp"
         android:layout_height="50dp"
         android:layout_marginStart="44dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="106dp"
         android:text="経過時間"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView1" />
+        app:layout_constraintTop_toBottomOf="@+id/searchView" />
 
     <TextView
         android:id="@+id/textView3"
@@ -73,37 +52,27 @@
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
     <Spinner
-        android:id="@+id/spinner3"
+        android:id="@+id/spinner_evaluation"
         android:layout_width="200dp"
         android:layout_height="50dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
         android:entries="@array/list3"
         app:layout_constraintStart_toEndOf="@+id/textView3"
-        app:layout_constraintTop_toBottomOf="@+id/spinner2" />
+        app:layout_constraintTop_toBottomOf="@+id/spinner_time" />
 
     <Spinner
-        android:id="@+id/spinner4"
+        android:id="@+id/spinner_time"
         android:layout_width="200dp"
         android:layout_height="50dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
-        android:entries="@array/list4"
-        app:layout_constraintStart_toEndOf="@+id/textView4"
-        app:layout_constraintTop_toBottomOf="@+id/spinner3" />
-
-    <Spinner
-        android:id="@+id/spinner2"
-        android:layout_width="200dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="106dp"
         android:entries="@array/list2"
         app:layout_constraintStart_toEndOf="@+id/textView2"
-        app:layout_constraintTop_toBottomOf="@+id/spinner1" />
+        app:layout_constraintTop_toBottomOf="@+id/searchView" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/button_search"
         android:layout_width="300dp"
         android:layout_height="60dp"
         android:layout_marginStart="55dp"
@@ -140,7 +109,7 @@
         android:layout_marginBottom="8dp"
         android:background="@android:color/darker_gray"
         app:layout_constraintBottom_toTopOf="@+id/button3"
-        app:layout_constraintTop_toBottomOf="@+id/button2"
+        app:layout_constraintTop_toBottomOf="@+id/button_search"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="0dp" />
 
@@ -156,13 +125,23 @@
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
     <Spinner
-        android:id="@+id/spinner5"
+        android:id="@+id/spinner_range"
         android:layout_width="200dp"
         android:layout_height="50dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="47dp"
         android:entries="@array/list6"
         app:layout_constraintStart_toEndOf="@+id/textView"
-        app:layout_constraintTop_toBottomOf="@+id/spinner4" />
+        app:layout_constraintTop_toBottomOf="@+id/textView_tag" />
+
+    <TextView
+        android:id="@+id/textView_tag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:text="TextView"
+        app:layout_constraintStart_toEndOf="@+id/textView4"
+        app:layout_constraintTop_toBottomOf="@+id/spinner_evaluation" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

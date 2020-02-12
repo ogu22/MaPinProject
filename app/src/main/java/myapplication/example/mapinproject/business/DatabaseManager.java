@@ -42,9 +42,55 @@ public class DatabaseManager {
         ref.setValue(tag);
     }
 
+    public static void setTag() {
+
+    }
+
+    public static void tagSearch(String tagText, final TagCallBack tagCallBack) {
+        database = FirebaseDatabase.getInstance();
+        DatabaseReference ref = database.getReference("tag").child(tagText);
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                GenericTypeIndicator<HashMap<String, Tag>> indicator = new GenericTypeIndicator<HashMap<String, Tag>>() {
+                };
+                HashMap<String, Tag> value = dataSnapshot.getValue(indicator);
+                tagCallBack.getTagCallBack(value);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.w(TAG, "getTag:onCancelled", databaseError.toException());
+                tagCallBack.getTagCallBack(new HashMap<String, Tag>());
+            }
+        });
+    }
+
     public static void getTag(String tagId, final TagCallBack databaseCallback) {
         database = FirebaseDatabase.getInstance();
         DatabaseReference ref = database.getReference("tag").child(tagId);
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                GenericTypeIndicator<HashMap<String, Tag>> indicator = new GenericTypeIndicator<HashMap<String, Tag>>() {
+                };
+                HashMap<String, Tag> value = dataSnapshot.getValue(indicator);
+                databaseCallback.getTagCallBack(value);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.w(TAG, "getTag:onCancelled", databaseError.toException());
+                databaseCallback.getTagCallBack(new HashMap<String, Tag>());
+            }
+        });
+    }
+
+    public static void editTag(String tagText, final TagCallBack databaseCallback) {
+        database = FirebaseDatabase.getInstance();
+        DatabaseReference ref = database.getReference("tag").child(tagText);
+
+
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -142,8 +188,14 @@ public class DatabaseManager {
 
     public static void getTweeit(SearchConditions conditions, final TweeitCallback databaseCallback) {
         database = FirebaseDatabase.getInstance();
-        DateRange range = conditions.getRange();
-        DatabaseReference ref = database.getReference("tweeit").orderByKey().startAt(range.getStartDate()).endAt(range.getEndDate()).getRef();
+        final DateRange range = conditions.getRange();
+        final String searchWords = conditions.getSearchWords();
+        final int rating = conditions.getRating();
+        DatabaseReference ref = database.getReference("tweeit")
+                .orderByKey().startAt(range.getStartDate()).endAt(range.getEndDate())
+                .orderByChild("tweeit").startAt(searchWords).endAt(searchWords + "\uf8ff")
+                .orderByChild("rating").startAt(rating)
+                .getRef();
         //TODO:検索条件を絞り込む
         ref.addValueEventListener(new ValueEventListener() {
             @Override
@@ -166,7 +218,7 @@ public class DatabaseManager {
         });
     }
 
-    public static void addImage(Uri filePath ,OnFailureListener failureListener ,OnCompleteListener completeListener) {
+    public static void addImage(Uri filePath, OnFailureListener failureListener, OnCompleteListener completeListener) {
         if (filePath == null) {
             //画像がない場合
             failureListener.onFailure(new Exception());

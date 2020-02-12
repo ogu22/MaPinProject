@@ -18,7 +18,7 @@
             android:background="#FFFFFF">
 
             <Button
-                android:id="@+id/button2"
+                android:id="@+id/button_search"
                 android:layout_width="match_parent"
                 android:layout_height="104dp"
                 android:text="通知１"
@@ -50,7 +50,7 @@
                 android:text="通知２"
                 android:textSize="36sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/button2" />
+                app:layout_constraintTop_toBottomOf="@+id/button_search" />
 
             <Button
                 android:id="@+id/button5"

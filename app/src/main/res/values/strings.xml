@@ -35,6 +35,12 @@
         <item>テレビ</item>
     </string-array>
 
+    <string-array name="list6">
+        <item>１キロ以内</item>
+        <item>２キロ以内</item>
+        <item>３キロ以内</item>
+    </string-array>
+
     <string-array name="list5">
         <item>閉業している</item>
         <item>存在しない</item>
@@ -66,6 +72,7 @@
     <string name="menu_postadd">新規投稿</string>
     <string name="menu_post">投稿</string>
     <string name="search">検索</string>
+    <string name="history">検索履歴</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->

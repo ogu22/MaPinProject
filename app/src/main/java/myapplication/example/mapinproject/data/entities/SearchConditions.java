@@ -6,13 +6,15 @@ public class SearchConditions {
     private String searchWords;
     private DateRange range;
     private Tag tag;
+    private int rating;
     private int radiusRange;
 
     public SearchConditions() {
         this.searchWords =  "";
         this.range = new DateRange();
         this.tag = new Tag();
-        this.radiusRange = 100;
+        this.rating = 0;
+        this.radiusRange = 1000;
     }
 
     public SearchConditions(String searchWords, DateRange range, Tag tag, int radiusRange) {
@@ -20,6 +22,10 @@ public class SearchConditions {
         this.range = range;
         this.tag = tag;
         this.radiusRange = radiusRange;
+    }
+
+    public int getRating() {
+        return rating;
     }
 
     public String getSearchWords() {
@@ -43,7 +49,8 @@ public class SearchConditions {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         SearchConditions that = (SearchConditions) o;
-        return radiusRange == that.radiusRange &&
+        return rating == that.rating &&
+                radiusRange == that.radiusRange &&
                 Objects.equals(searchWords, that.searchWords) &&
                 Objects.equals(range, that.range) &&
                 Objects.equals(tag, that.tag);
@@ -51,7 +58,7 @@ public class SearchConditions {
 
     @Override
     public int hashCode() {
-        return Objects.hash(searchWords, range, tag, radiusRange);
+        return Objects.hash(searchWords, range, tag, rating, radiusRange);
     }
 
     @Override
@@ -60,6 +67,7 @@ public class SearchConditions {
                 "searchWords='" + searchWords + '\'' +
                 ", range=" + range +
                 ", tag=" + tag +
+                ", rating=" + rating +
                 ", radiusRange=" + radiusRange +
                 '}';
     }

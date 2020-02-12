@@ -22,7 +22,7 @@ public class Tweeit implements Serializable {
     private String timestamp;
     private int evaluation;
 
-    public Tweeit(String tweeitId, String userId, ArrayList<Tag> tags, Location locations, ArrayList<Reply> replies, String tweeitTitle, String tweeit, String imagePath, String timestamp, int evaluation) {
+    public Tweeit(String tweeitId, String userId, List<Tag> tags, Location locations, ArrayList<Reply> replies, String tweeitTitle, String tweeit, String imagePath, String timestamp, int evaluation) {
         this.tweeitId = tweeitId;
         this.userId = userId;
         this.tags = tags;

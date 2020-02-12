@@ -1,5 +1,6 @@
 package myapplication.example.mapinproject.ui.profile;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -30,6 +32,7 @@ import myapplication.example.mapinproject.business.UserCallBack;
 import myapplication.example.mapinproject.business.activities.LoginActivity;
 import myapplication.example.mapinproject.data.entities.Test;
 import myapplication.example.mapinproject.data.entities.User;
+import myapplication.example.mapinproject.ui.search.History_SearchFragment;
 
 public class ProfileFragment extends Fragment implements View.OnClickListener {
 
@@ -44,6 +47,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         return fragment;
     }
 
+    @SuppressLint("RestrictedApi")
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -87,14 +91,10 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         }
     }
 
-    public void profile(String pro){
-
-    }
-
-
     private void Profile(View v) {
-        // プロフィール編集画面が未作成のため仮にログインへ
-        Intent intent = new Intent(getActivity(), LoginActivity.class);
-        startActivity(intent);
+        // プロフィール編集画面ログインへ
+        FragmentTransaction pchange = getFragmentManager().beginTransaction();
+        pchange.replace(R.id.nav_host_fragment, new ProfileChangeFragment());
+        pchange.commit();
     }
 }

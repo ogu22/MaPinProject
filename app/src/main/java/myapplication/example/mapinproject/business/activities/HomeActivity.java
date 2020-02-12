@@ -102,6 +102,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 fab.setVisibility(View.GONE);
                 FragmentTransaction search = getSupportFragmentManager().beginTransaction();
                 search.replace(R.id.nav_host_fragment, new SearchFragment());
+                search.addToBackStack(null);
                 search.commit();
                 break;
 

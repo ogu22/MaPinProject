@@ -30,7 +30,6 @@ import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.maps.model.Polygon;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
@@ -39,6 +38,7 @@ import java.util.HashMap;
 import myapplication.example.mapinproject.R;
 import myapplication.example.mapinproject.business.TweeitCallback;
 import myapplication.example.mapinproject.business.DatabaseManager;
+import myapplication.example.mapinproject.data.entities.Params;
 import myapplication.example.mapinproject.data.entities.SearchConditions;
 import myapplication.example.mapinproject.data.entities.Tweeit;
 import myapplication.example.mapinproject.ui.postadd.PostAddFragment;
@@ -79,6 +79,11 @@ public class HomeFragment extends Fragment implements OnMapLongClickListener,OnM
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
     }
 
     @Override
@@ -126,7 +131,7 @@ public class HomeFragment extends Fragment implements OnMapLongClickListener,OnM
 
     @Override
     public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
-        final SearchConditions conditions = new SearchConditions();
+        final SearchConditions conditions = verfiedCondition();
         DatabaseManager.getTweeit(conditions, new TweeitCallback() {
             @Override
             public void getTweeitCallBack(HashMap<String, Tweeit> map) {
@@ -166,6 +171,14 @@ public class HomeFragment extends Fragment implements OnMapLongClickListener,OnM
             }
         });
         super.onViewStateRestored(savedInstanceState);
+    }
+
+    private SearchConditions verfiedCondition() {
+        SearchConditions conditions = Params.searchConditions;
+        if (conditions == null) {
+            conditions = new SearchConditions();
+        }
+        return conditions;
     }
 
 

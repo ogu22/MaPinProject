@@ -16,6 +16,14 @@ public class DateRange {
         this.endDate = endDate;
     }
 
+    public DateRange(Calendar startDate) {
+        this.startDate = startDate;
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(new Date());
+        endDate = calendar;
+    }
+
     public DateRange() {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(new Date());

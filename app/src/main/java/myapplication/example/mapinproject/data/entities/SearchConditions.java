@@ -1,8 +1,9 @@
 package myapplication.example.mapinproject.data.entities;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class SearchConditions {
+public class SearchConditions implements Serializable {
     private String searchWords;
     private DateRange range;
     private Tag tag;
@@ -17,10 +18,11 @@ public class SearchConditions {
         this.radiusRange = 1000;
     }
 
-    public SearchConditions(String searchWords, DateRange range, Tag tag, int radiusRange) {
+    public SearchConditions(String searchWords, DateRange range, Tag tag,int rating, int radiusRange) {
         this.searchWords = searchWords;
         this.range = range;
         this.tag = tag;
+        this.rating = rating;
         this.radiusRange = radiusRange;
     }
 

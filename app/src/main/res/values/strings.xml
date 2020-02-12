@@ -35,6 +35,12 @@
         <item>テレビ</item>
     </string-array>
 
+    <string-array name="list6">
+        <item>１キロ以内</item>
+        <item>２キロ以内</item>
+        <item>３キロ以内</item>
+    </string-array>
+
     <string-array name="list5">
         <item>閉業している</item>
         <item>存在しない</item>

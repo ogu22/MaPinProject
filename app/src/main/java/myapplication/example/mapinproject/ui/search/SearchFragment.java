@@ -33,7 +33,7 @@ public class SearchFragment extends Fragment implements View.OnClickListener{
         private Spinner spinner_time;
         private Spinner spinner_evaluation;
         private Spinner spinner_range;
-        private TextView textView_tag;
+        private TextView edit_tag;
         private Button button3;
         private Button button_search;
 
@@ -54,7 +54,7 @@ public class SearchFragment extends Fragment implements View.OnClickListener{
         spinner_time = view.findViewById(R.id.spinner_time);
         spinner_evaluation = view.findViewById(R.id.spinner_evaluation);
         spinner_range = view.findViewById(R.id.spinner_range);
-        textView_tag = view.findViewById(R.id.textView_tag);
+        edit_tag = view.findViewById(R.id.edit_tag);
 
         button_search = view.findViewById(R.id.button_search);
         button3 =view.findViewById(R.id.button3);
@@ -88,7 +88,7 @@ public class SearchFragment extends Fragment implements View.OnClickListener{
         String searchWord = searchView.getQuery().toString();
         Calendar dispLimit = convertTime((String) spinner_time.getSelectedItem());
         DateRange dateRange = new DateRange(dispLimit);
-        Tag dispTag = convertTag(textView_tag.getText().toString());
+        Tag dispTag = convertTag(edit_tag.getText().toString());
         int dispEvaluation = convertEvaluation((String) spinner_evaluation.getSelectedItem());
         int dispRange = convertRange((String) spinner_range.getSelectedItem());
         return new SearchConditions(searchWord,dateRange,dispTag,dispEvaluation,dispRange);

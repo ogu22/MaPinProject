@@ -124,24 +124,23 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
+    <EditText
+        android:id="@+id/edit_tag"
+        android:layout_width="200dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintStart_toEndOf="@+id/textView4"
+        app:layout_constraintTop_toBottomOf="@+id/spinner_evaluation" />
+
     <Spinner
         android:id="@+id/spinner_range"
         android:layout_width="200dp"
         android:layout_height="50dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="47dp"
+        android:layout_marginTop="28dp"
         android:entries="@array/list6"
         app:layout_constraintStart_toEndOf="@+id/textView"
-        app:layout_constraintTop_toBottomOf="@+id/textView_tag" />
-
-    <TextView
-        android:id="@+id/textView_tag"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
-        android:text="TextView"
-        app:layout_constraintStart_toEndOf="@+id/textView4"
-        app:layout_constraintTop_toBottomOf="@+id/spinner_evaluation" />
+        app:layout_constraintTop_toBottomOf="@+id/edit_tag" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

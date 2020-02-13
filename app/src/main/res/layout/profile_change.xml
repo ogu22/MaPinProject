@@ -10,37 +10,64 @@
 
     <Button
         android:id="@+id/pbutton7"
-        android:layout_width="337dp"
-        android:layout_height="99dp"
+        android:layout_width="327dp"
+        android:layout_height="64dp"
         android:layout_marginStart="37dp"
-        android:layout_marginTop="130dp"
+        android:layout_marginTop="21dp"
         android:layout_marginEnd="37dp"
         android:text="変更を確定"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ptextView12" />
+        app:layout_constraintTop_toBottomOf="@+id/edittext2" />
 
-    <TextView
-        android:id="@+id/ptextView12"
-        android:layout_width="246dp"
-        android:layout_height="28dp"
+    <EditText
+        android:id="@+id/edittext1"
+        android:layout_width="248dp"
+        android:layout_height="48dp"
         android:layout_marginStart="84dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="8dp"
         android:text="名前"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pimageView6" />
+        app:layout_constraintTop_toBottomOf="@+id/post_image_button" />
 
-    <ImageView
-        android:id="@+id/pimageView6"
-        android:layout_width="158dp"
-        android:layout_height="145dp"
-        android:layout_marginStart="136dp"
-        android:layout_marginTop="44dp"
+    <ImageButton
+        android:id="@+id/post_image_button"
+        android:layout_width="155dp"
+        android:layout_height="135dp"
+        android:layout_marginStart="125dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="125dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@android:drawable/ic_menu_info_details" />
+
+    <EditText
+        android:id="@+id/edittext2"
+        android:layout_width="338dp"
+        android:layout_height="151dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="30dp"
+        android:text="TextView"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView14" />
+
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="114dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="16dp"
+        android:text="コメント"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edittext1" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

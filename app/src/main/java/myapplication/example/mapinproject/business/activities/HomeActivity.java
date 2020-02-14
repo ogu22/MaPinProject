@@ -8,6 +8,7 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -36,11 +37,13 @@ public class HomeActivity extends AppCompatActivity {
     private static final int REQUEST_CODE = 1;
     private AppBarConfiguration mAppBarConfiguration;
     private DrawerLayout drawer;
+    private ImageView imageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        imageView = findViewById(R.id.imageView3);
         //パーミッション、位置情報h許可Activityの呼び出し
         Locset.request(HomeActivity.this, Locset.SettingPriority.HIGH_ACCURACY, REQUEST_CODE);
 

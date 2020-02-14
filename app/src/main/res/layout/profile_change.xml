@@ -9,6 +9,16 @@
 
 
     <Button
+        android:id="@+id/buckbutton2"
+        android:layout_width="44dp"
+        android:layout_height="37dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="3dp"
+        android:background="?attr/actionModeCloseDrawable"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
         android:id="@+id/pbutton7"
         android:layout_width="327dp"
         android:layout_height="64dp"

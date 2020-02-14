@@ -19,12 +19,14 @@
 
             <TextView
                 android:id="@+id/textView4"
-                android:layout_width="189dp"
-                android:layout_height="53dp"
-                android:layout_marginStart="104dp"
-                android:layout_marginTop="24dp"
+                android:layout_width="96dp"
+                android:layout_height="34dp"
+                android:layout_marginStart="157dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="158dp"
                 android:text="検索履歴"
-                android:textSize="36sp"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -32,9 +34,11 @@
                 android:id="@+id/button1"
                 android:layout_width="290dp"
                 android:layout_height="65dp"
-                android:layout_marginStart="50dp"
-                android:layout_marginTop="28dp"
+                android:layout_marginStart="60dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="60dp"
                 android:text="投稿１"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
@@ -42,9 +46,11 @@
                 android:id="@+id/test_search"
                 android:layout_width="290dp"
                 android:layout_height="65dp"
-                android:layout_marginStart="50dp"
+                android:layout_marginStart="60dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginEnd="60dp"
                 android:text="投稿２"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/button1" />
 
@@ -52,9 +58,11 @@
                 android:id="@+id/button3"
                 android:layout_width="290dp"
                 android:layout_height="65dp"
-                android:layout_marginStart="50dp"
+                android:layout_marginStart="60dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginEnd="60dp"
                 android:text="投稿３"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/test_search" />
 
@@ -62,9 +70,11 @@
                 android:id="@+id/button4"
                 android:layout_width="290dp"
                 android:layout_height="65dp"
-                android:layout_marginStart="50dp"
+                android:layout_marginStart="60dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginEnd="60dp"
                 android:text="投稿４"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/button3" />
 
@@ -72,9 +82,11 @@
                 android:id="@+id/button5"
                 android:layout_width="290dp"
                 android:layout_height="65dp"
-                android:layout_marginStart="50dp"
+                android:layout_marginStart="60dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginEnd="60dp"
                 android:text="投稿５"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/button4" />
 
@@ -82,9 +94,11 @@
                 android:id="@+id/button6"
                 android:layout_width="290dp"
                 android:layout_height="65dp"
-                android:layout_marginStart="50dp"
+                android:layout_marginStart="60dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginEnd="60dp"
                 android:text="投稿６"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/button5" />
 
@@ -92,9 +106,11 @@
                 android:id="@+id/button7"
                 android:layout_width="290dp"
                 android:layout_height="65dp"
-                android:layout_marginStart="50dp"
+                android:layout_marginStart="60dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginEnd="61dp"
                 android:text="投稿７"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/button6" />
 
@@ -102,9 +118,11 @@
                 android:id="@+id/button8"
                 android:layout_width="290dp"
                 android:layout_height="65dp"
-                android:layout_marginStart="50dp"
+                android:layout_marginStart="60dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginEnd="60dp"
                 android:text="投稿８"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/button7" />
 
@@ -112,9 +130,11 @@
                 android:id="@+id/button9"
                 android:layout_width="290dp"
                 android:layout_height="65dp"
-                android:layout_marginStart="50dp"
+                android:layout_marginStart="60dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginEnd="60dp"
                 android:text="投稿９"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/button8" />
 
@@ -122,9 +142,11 @@
                 android:id="@+id/button10"
                 android:layout_width="290dp"
                 android:layout_height="65dp"
-                android:layout_marginStart="50dp"
+                android:layout_marginStart="60dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginEnd="60dp"
                 android:text="投稿１０"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/button9" />
 
@@ -132,11 +154,25 @@
                 android:id="@+id/button11"
                 android:layout_width="290dp"
                 android:layout_height="65dp"
-                android:layout_marginStart="50dp"
+                android:layout_marginStart="60dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginEnd="60dp"
+                android:layout_marginBottom="16dp"
                 android:text="投稿１１"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/button10" />
+
+            <Button
+                android:id="@+id/buckbutton"
+                android:layout_width="44dp"
+                android:layout_height="37dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="3dp"
+                android:background="?attr/actionModeCloseDrawable"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>

@@ -79,4 +79,8 @@ public class LoginActivity extends BaseLoginActivity implements View.OnClickList
         FirebaseUser prevUser = FirebaseAuth.getInstance().getCurrentUser();
         return  (prevUser != null) ;
     }
+
+    @Override
+    public void onBackPressed() {
+    }
 }

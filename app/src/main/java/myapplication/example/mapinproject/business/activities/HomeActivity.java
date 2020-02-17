@@ -8,6 +8,7 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -32,33 +33,24 @@ import myapplication.example.mapinproject.ui.postadd.PostAddFragment;
 import myapplication.example.mapinproject.ui.profile.ProfileFragment;
 import myapplication.example.mapinproject.ui.search.SearchFragment;
 
-public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class HomeActivity extends AppCompatActivity {
     private static final int REQUEST_CODE = 1;
     private AppBarConfiguration mAppBarConfiguration;
     private DrawerLayout drawer;
+    private ImageView imageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        imageView = findViewById(R.id.imageView3);
         //パーミッション、位置情報h許可Activityの呼び出し
         Locset.request(HomeActivity.this, Locset.SettingPriority.HIGH_ACCURACY, REQUEST_CODE);
 
         //ナビゲーションドロワー
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        FloatingActionButton fab = findViewById(R.id.fab);
 
-        fab.setVisibility(View.VISIBLE);
-
-        // 押したら現在地がわかるように
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
         drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
@@ -89,7 +81,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int itemId = item.getItemId();
-        FloatingActionButton fab = findViewById(R.id.fab);
         switch (itemId) {
             case R.id.action_logout:
                 // ログアウトタップ
@@ -99,7 +90,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.searchbutton:
                 // 検索タップ
-                fab.setVisibility(View.GONE);
                 FragmentTransaction search = getSupportFragmentManager().beginTransaction();
                 search.replace(R.id.nav_host_fragment, new SearchFragment());
                 search.addToBackStack(null);
@@ -108,45 +98,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    @SuppressLint("RestrictedApi")
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-        int itemId = menuItem.getItemId();
-        FloatingActionButton fab = findViewById(R.id.fab);
-        switch (itemId) {
-            case R.id.nav_home:
-                fab.setVisibility(View.VISIBLE);
-                // Activity内部での処理を想定
-                FragmentTransaction home = getSupportFragmentManager().beginTransaction();
-                home.replace(R.id.nav_host_fragment, new HomeFragment());
-                home.commit();
-                break;
-            case R.id.nav_notice:
-                fab.setVisibility(View.GONE);
-                // Activity内部での処理を想定
-                FragmentTransaction notice = getSupportFragmentManager().beginTransaction();
-                notice.replace(R.id.nav_host_fragment, new NoticeFragment());
-                notice.commit();
-                break;
-            case R.id.nav_profile:
-                fab.setVisibility(View.GONE);
-                // Activity内部での処理を想定
-                FragmentTransaction profile = getSupportFragmentManager().beginTransaction();
-                profile.replace(R.id.nav_host_fragment, new ProfileFragment());
-                profile.commit();
-                break;
-            case R.id.nav_postadd:
-                fab.setVisibility(View.GONE);
-                // Activity内部での処理を想定
-                FragmentTransaction postadd = getSupportFragmentManager().beginTransaction();
-                postadd.replace(R.id.nav_host_fragment, new PostAddFragment());
-                postadd.commit();
-                break;
-        }
-        drawer.closeDrawer(Gravity.LEFT);
-        return false;
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

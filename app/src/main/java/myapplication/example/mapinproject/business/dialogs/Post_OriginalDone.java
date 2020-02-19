@@ -1,4 +1,4 @@
-package myapplication.example.mapinproject.business.fragments;
+package myapplication.example.mapinproject.business.dialogs;
 
 import android.app.AlertDialog;
 import android.app.Dialog;

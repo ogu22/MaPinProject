@@ -1,19 +1,15 @@
 package myapplication.example.mapinproject.business.activities;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 
 import androidx.annotation.NonNull;
@@ -27,9 +23,11 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import myapplication.example.mapinproject.R;
 import myapplication.example.mapinproject.business.locset.Locset;
+import myapplication.example.mapinproject.business.login.LoginMenuActivity;
+import myapplication.example.mapinproject.data.entities.User;
 import myapplication.example.mapinproject.ui.home.HomeFragment;
 import myapplication.example.mapinproject.ui.notice.NoticeFragment;
-import myapplication.example.mapinproject.ui.postadd.PostAddFragment;
+import myapplication.example.mapinproject.ui.post.PostAddFragment;
 import myapplication.example.mapinproject.ui.profile.ProfileFragment;
 import myapplication.example.mapinproject.ui.search.SearchFragment;
 
@@ -38,12 +36,18 @@ public class HomeActivity extends AppCompatActivity {
     private AppBarConfiguration mAppBarConfiguration;
     private DrawerLayout drawer;
     private ImageView imageView;
+    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         imageView = findViewById(R.id.imageView3);
+
+        Intent intent = getIntent();
+        user = (User) intent.getSerializableExtra("user");
+
+
         //パーミッション、位置情報h許可Activityの呼び出し
         Locset.request(HomeActivity.this, Locset.SettingPriority.HIGH_ACCURACY, REQUEST_CODE);
 
@@ -53,6 +57,39 @@ public class HomeActivity extends AppCompatActivity {
 
         drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                int itemId = menuItem.getItemId();
+                switch (itemId) {
+                    case R.id.nav_home:
+                        FragmentTransaction home = getSupportFragmentManager().beginTransaction();
+                        home.replace(R.id.nav_host_fragment, new HomeFragment());
+                        home.commit();
+                        break;
+                    case R.id.nav_notice:
+                        FragmentTransaction notice = getSupportFragmentManager().beginTransaction();
+                        notice.replace(R.id.nav_host_fragment, new NoticeFragment());
+                        notice.commit();
+                        break;
+                    case R.id.nav_profile:
+                        Bundle bundle = new Bundle();
+                        bundle.putSerializable("user", user);
+
+                        FragmentTransaction profile = getSupportFragmentManager().beginTransaction();
+                        profile.replace(R.id.nav_host_fragment, new ProfileFragment());
+                        profile.commit();
+                        break;
+                    case R.id.nav_postadd:
+                        FragmentTransaction postadd = getSupportFragmentManager().beginTransaction();
+                        postadd.replace(R.id.nav_host_fragment, new PostAddFragment());
+                        postadd.commit();
+                        break;
+                }
+                drawer.closeDrawer(Gravity.LEFT);
+                return false;
+            }
+        });
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
@@ -61,7 +98,7 @@ public class HomeActivity extends AppCompatActivity {
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
-        NavigationUI.setupWithNavController(navigationView, navController);
+        //NavigationUI.setupWithNavController(navigationView, navController);
     }
 
     @Override
@@ -85,7 +122,7 @@ public class HomeActivity extends AppCompatActivity {
             case R.id.action_logout:
                 // ログアウトタップ
                 FirebaseAuth.getInstance().signOut();
-                Intent intent = new Intent(this, LoginActivity.class);
+                Intent intent = new Intent(this, LoginMenuActivity.class);
                 startActivity(intent);
                 break;
             case R.id.searchbutton:

@@ -218,7 +218,6 @@ public class DatabaseManager {
 
     public static void getImage(String url) {
         storage = FirebaseStorage.getInstance();
-
     }
 
 }

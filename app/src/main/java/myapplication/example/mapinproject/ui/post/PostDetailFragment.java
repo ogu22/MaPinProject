@@ -1,7 +1,5 @@
-package myapplication.example.mapinproject.ui.postdetail;
+package myapplication.example.mapinproject.ui.post;
 
-import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -10,41 +8,24 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.provider.MediaStore;
-import android.text.Layout;
-import android.text.util.Linkify;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.RatingBar;
 import android.widget.TextView;
-
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.storage.UploadTask;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URI;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
@@ -52,13 +33,9 @@ import myapplication.example.mapinproject.R;
 import myapplication.example.mapinproject.business.DatabaseManager;
 import myapplication.example.mapinproject.business.ReplyItemDecoration;
 import myapplication.example.mapinproject.business.ReplyRecycleViewAdapter;
-import myapplication.example.mapinproject.business.TweeitCallback;
 import myapplication.example.mapinproject.business.Util;
-import myapplication.example.mapinproject.data.entities.Location;
 import myapplication.example.mapinproject.data.entities.Reply;
-import myapplication.example.mapinproject.data.entities.Tag;
 import myapplication.example.mapinproject.data.entities.Tweeit;
-import myapplication.example.mapinproject.ui.postadd.PostAddFragment;
 
 import static android.app.Activity.RESULT_OK;
 import static android.content.Context.INPUT_METHOD_SERVICE;
@@ -105,7 +82,7 @@ public class PostDetailFragment extends Fragment {
         pinName = view.findViewById(R.id.pin_name);
         postRating = view.findViewById(R.id.post_rating);
         postDate = view.findViewById(R.id.post_date);
-        postImage = view.findViewById(R.id.post_image);
+        postImage = view.findViewById(R.id.display_image);
         tagText = view.findViewById(R.id.tag_text);
         tagText.setPaintFlags(tagText.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         postComment = view.findViewById(R.id.post_comment);

@@ -1,6 +1,5 @@
-package myapplication.example.mapinproject.ui.postadd;
+package myapplication.example.mapinproject.ui.post;
 
-import android.app.DialogFragment;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -39,7 +38,6 @@ import myapplication.example.mapinproject.data.entities.Location;
 import myapplication.example.mapinproject.data.entities.Reply;
 import myapplication.example.mapinproject.data.entities.Tag;
 import myapplication.example.mapinproject.data.entities.Tweeit;
-import myapplication.example.mapinproject.data.entities.User;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -85,10 +83,10 @@ public class PostAddFragment extends Fragment {
         locationText = view.findViewById(R.id.post_location_text);
         contentText = view.findViewById(R.id.post_content_text);
         categoryText = view.findViewById(R.id.post_category_text);
-        imageView = view.findViewById(R.id.post_image_button);
+        imageView = view.findViewById(R.id.display_image);
         ratingBar = view.findViewById(R.id.ratingBar);
 
-        view.findViewById(R.id.post_image_button).setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.display_image).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);

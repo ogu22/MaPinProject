@@ -41,8 +41,8 @@ import myapplication.example.mapinproject.business.DatabaseManager;
 import myapplication.example.mapinproject.data.entities.Params;
 import myapplication.example.mapinproject.data.entities.SearchConditions;
 import myapplication.example.mapinproject.data.entities.Tweeit;
-import myapplication.example.mapinproject.ui.postadd.PostAddFragment;
-import myapplication.example.mapinproject.ui.postdetail.PostDetailFragment;
+import myapplication.example.mapinproject.ui.post.PostAddFragment;
+import myapplication.example.mapinproject.ui.post.PostDetailFragment;
 
 import static com.google.maps.android.SphericalUtil.computeDistanceBetween;
 

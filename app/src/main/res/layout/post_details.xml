@@ -98,7 +98,7 @@
                     android:textColor="#0000EE" />
 
                 <ImageView
-                    android:id="@+id/post_image"
+                    android:id="@+id/display_image"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/layout_margin_8"

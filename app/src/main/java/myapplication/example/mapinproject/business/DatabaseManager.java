@@ -3,8 +3,6 @@ package myapplication.example.mapinproject.business;
 import android.net.Uri;
 import android.util.Log;
 
-import androidx.annotation.NonNull;
-
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -22,6 +20,7 @@ import com.google.firebase.storage.UploadTask;
 import java.util.HashMap;
 import java.util.UUID;
 
+import androidx.annotation.NonNull;
 import myapplication.example.mapinproject.data.entities.DateRange;
 import myapplication.example.mapinproject.data.entities.Reply;
 import myapplication.example.mapinproject.data.entities.SearchConditions;
@@ -119,19 +118,18 @@ public class DatabaseManager {
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                GenericTypeIndicator<HashMap<String, User>> indicator = new GenericTypeIndicator<HashMap<String, User>>() {
-                };
-                HashMap<String, User> value = dataSnapshot.getValue(indicator);
-                databaseCallback.getUserCallBack(value);
+                User user = dataSnapshot.getValue(User.class);
+                databaseCallback.getUserCallBack(user);
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 Log.w(TAG, "getUser:onCancelled", databaseError.toException());
-                databaseCallback.getUserCallBack(new HashMap<String, User>());
+                //databaseCallback.getUserCallBack(new HashMap<String, User>());
             }
         });
     }
+
 
     public static void addReply(Reply reply) {
         database = FirebaseDatabase.getInstance();

@@ -9,7 +9,7 @@
 
 
     <Button
-        android:id="@+id/pbutton_fixed"
+        android:id="@+id/btn_edit"
         android:layout_width="327dp"
         android:layout_height="64dp"
         android:layout_marginStart="37dp"

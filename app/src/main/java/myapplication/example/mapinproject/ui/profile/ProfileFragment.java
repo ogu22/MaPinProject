@@ -19,15 +19,15 @@ import android.widget.TextView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-
 import java.io.IOException;
 import java.io.InputStream;
 
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import myapplication.example.mapinproject.R;
 import myapplication.example.mapinproject.business.DatabaseManager;
+import myapplication.example.mapinproject.business.UserCallBack;
 import myapplication.example.mapinproject.data.entities.User;
 
 import static android.app.Activity.RESULT_OK;
@@ -43,12 +43,10 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
 
     private Uri filePath;
 
-    private Button pbutton7;
+    private Button btn_edit;
     private Button pbutton8;
     private Button pbutton9;
     private Button pbutton;
-
-
 
     public static ProfileFragment newInstance() {
         ProfileFragment fragment = new ProfileFragment();
@@ -71,8 +69,8 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         display_comment =view.findViewById(R.id.display_comment);
         display_name = view.findViewById(R.id.display_name);
         display_image = view.findViewById(R.id.display_image);
-        pbutton7 = view.findViewById(R.id.pbutton_fixed);
-        view.findViewById(R.id.pbutton_fixed).setOnClickListener(this);
+        btn_edit = view.findViewById(R.id.btn_edit);
+        view.findViewById(R.id.btn_edit).setOnClickListener(this);
 
         final DatabaseManager databaseManager = new DatabaseManager();
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -130,7 +128,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
     }
 
     public void onClick(View v) {
-        if (v == pbutton7) {
+        if (v == btn_edit) {
             // プロフィール編集画面へ
             Profile(v);
         }else if(v == pbutton8){
@@ -144,8 +142,12 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
 
     private void Profile(View v) {
         // プロフィール編集画面へ
-        FragmentTransaction pchange = getFragmentManager().beginTransaction();
-        pchange.replace(R.id.nav_host_fragment, new ProfileChangeFragment());
-        pchange.commit();
+        ProfileChangeFragment profileChangeFragment = new ProfileChangeFragment();
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("user", user);
+        profileChangeFragment.setArguments(bundle);
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.replace(R.id.nav_host_fragment, profileChangeFragment);
+        transaction.commit();
     }
 }

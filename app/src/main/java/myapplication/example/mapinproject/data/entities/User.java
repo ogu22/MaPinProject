@@ -12,6 +12,9 @@ public class User implements Serializable {
     private String imagePath;
     private String comment;
 
+    public User() {
+    }
+
     public User(String userId, String userName, String imagePath, String comment) {
         this.userId = userId;
         this.userName = userName;

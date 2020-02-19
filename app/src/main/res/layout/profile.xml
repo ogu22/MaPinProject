@@ -44,13 +44,13 @@
             android:layout_marginStart="124dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
-            app:layout_constraintEnd_toStartOf="@+id/pbutton_fixed"
+            app:layout_constraintEnd_toStartOf="@+id/btn_edit"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@android:drawable/ic_menu_info_details" />
 
         <Button
-            android:id="@+id/pbutton_fixed"
+            android:id="@+id/btn_edit"
             android:layout_width="87dp"
             android:layout_height="82dp"
             android:layout_marginStart="24dp"

@@ -5,5 +5,5 @@ import java.util.HashMap;
 import myapplication.example.mapinproject.data.entities.User;
 
 public interface UserCallBack {
-    void getUserCallBack(HashMap<String,User> map);
+    void getUserCallBack(User user);
 }

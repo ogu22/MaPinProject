@@ -73,12 +73,13 @@ public class HomeActivity extends AppCompatActivity {
                         notice.commit();
                         break;
                     case R.id.nav_profile:
+                        ProfileFragment profile = new ProfileFragment();
                         Bundle bundle = new Bundle();
                         bundle.putSerializable("user", user);
-
-                        FragmentTransaction profile = getSupportFragmentManager().beginTransaction();
-                        profile.replace(R.id.nav_host_fragment, new ProfileFragment());
-                        profile.commit();
+                        profile.setArguments(bundle);
+                        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                        transaction.replace(R.id.nav_host_fragment, profile);
+                        transaction.commit();
                         break;
                     case R.id.nav_postadd:
                         FragmentTransaction postadd = getSupportFragmentManager().beginTransaction();

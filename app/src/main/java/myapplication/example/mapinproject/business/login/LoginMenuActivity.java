@@ -49,4 +49,9 @@ public class LoginMenuActivity extends LoginManegerActivity implements View.OnCl
         FirebaseUser prevUser = FirebaseAuth.getInstance().getCurrentUser();
         return  (prevUser != null) ;
     }
+
+    @Override
+    public void onBackPressed() {
+    }
+    
 }

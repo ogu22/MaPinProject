@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <string name="app_name">MaPinProject</string>
     <string name="title_activity_maps">Map</string>
     <string name="facebook_app_id">569922056898346</string>
@@ -79,10 +79,14 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <!-- Facebook application ID and custom URL scheme (app ID prefixed by 'fb'). -->
-    <string name="facebook_application_id" translatable="false">569922056898346</string>
-    <string name="facebook_login_protocol_scheme" translatable="false">4f3946241bf0aeed7fb45d50ad778968</string>
+    <string name="facebook_application_id" translatable="false">942509686146667</string>
+    <string name="facebook_login_protocol_scheme" translatable="false">05d27c813930989173f681e5926cb640</string>
     <!-- Twitter consumer key and secret -->
-    <string name="twitter_consumer_key" translatable="false">axdD3rFbW83aSpVRObMEbof6t</string>
-    <string name="twitter_consumer_secret" translatable="false">HCruocwMQw92fc24384dSgpqD5mV7S8dErBohkdH96XARmuzuM</string>
+    <string name="twitter_consumer_key" translatable="false">zlz8K11wimNOp6YfbV6fwLdzX</string>
+    <string name="twitter_consumer_secret" translatable="false">6E1vzJxs6JftRJHCIH6ftHcNrPr1hLyp3TIESDSVGpRLrNL8Zn</string>
+
+<!--    <string name="facebook_app_id">942509686146667</string>-->
+<!--    <string name="fb_login_protocol_scheme">05d27c813930989173f681e5926cb640</string>-->
+
 
 </resources>

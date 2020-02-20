@@ -16,8 +16,7 @@ public class LoginMenuActivity extends LoginManegerActivity implements View.OnCl
 
         //ログインチェック
         if (isLogin()){
-            changeHomeActivity();
-//            changeUI();
+            changeUI();
         }
 
         setContentView(R.layout.login_menu);
@@ -37,10 +36,10 @@ public class LoginMenuActivity extends LoginManegerActivity implements View.OnCl
                 googleSignIn();
                 break;
             case R.id.loginTwitter:
-
+                twitterSignIn();
                 break;
             case R.id.loginFacebook:
-
+                facebookSignIn();
                 break;
         }
     }

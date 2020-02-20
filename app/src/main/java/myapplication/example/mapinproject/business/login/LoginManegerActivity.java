@@ -7,18 +7,22 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.facebook.FacebookSdk;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.auth.OAuthProvider;
 
 import java.util.HashMap;
 
@@ -41,6 +45,8 @@ public class LoginManegerActivity extends AppCompatActivity {
     //任意の数字
     private static final int RC_SIGN_IN = 9001;
 
+    OAuthProvider.Builder provider = OAuthProvider.newBuilder("twitter.com");
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +59,10 @@ public class LoginManegerActivity extends AppCompatActivity {
                 .requestEmail()
                 .build();
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+
+        FacebookSdk.sdkInitialize(getApplicationContext());
+
+        provider.addCustomParameter("lang", "fr");
 
     }
 
@@ -99,7 +109,36 @@ public class LoginManegerActivity extends AppCompatActivity {
                 });
     }
 
+    protected void twitterSignIn(){
+        mAuth
+                .startActivityForSignInWithProvider(/* activity= */ this, provider.build())
+                .addOnSuccessListener(
+                        new OnSuccessListener<AuthResult>() {
+                            @Override
+                            public void onSuccess(AuthResult authResult) {
+                                // User is signed in.
+                                // IdP data available in
+                                // authResult.getAdditionalUserInfo().getProfile().
+                                // The OAuth access token can also be retrieved:
+                                // authResult.getCredential().getAccessToken().
+                                // The OAuth secret can be retrieved by calling:
+                                // authResult.getCredential().getSecret().
+                                createUser();
+                                changeUI();
+                            }
+                        })
+                .addOnFailureListener(
+                        new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                // Handle failure.
+                            }
+                        });
+    }
 
+    protected void facebookSignIn(){
+
+    }
 
     protected void emailSignIn(String email, String password) {
         if (!validateForm(email,password)) {
@@ -112,8 +151,7 @@ public class LoginManegerActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             //ログイン完了
-                            changeHomeActivity();
-//                            changeUI();
+                            changeUI();
                         } else {
                             //ログイン失敗
                             Toast.makeText(getBaseContext(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();
@@ -126,15 +164,12 @@ public class LoginManegerActivity extends AppCompatActivity {
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         String uid = firebaseUser.getUid();
         DatabaseManager.getUser(uid, new UserCallBack() {
-            @Override
-            public void getUserCallBack(HashMap<String, User> map) {
-
-                for(User user:map.values()){
-                    currentUser = user;
-                }
-                changeHomeActivity();
-            }
-        });
+                    @Override
+                    public void getUserCallBack(User user) {
+                        currentUser = user;
+                        changeHomeActivity();
+                    }
+                });
     }
 
     protected void createAccount(String email, String password) {
@@ -160,6 +195,10 @@ public class LoginManegerActivity extends AppCompatActivity {
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         String uid = firebaseUser.getUid();
         String userName = firebaseUser.getDisplayName();
+        if(userName==null){
+            userName="";
+        }
+
         Uri imageUri = firebaseUser.getPhotoUrl();
         String imagePath;
         if (imageUri == null) {
